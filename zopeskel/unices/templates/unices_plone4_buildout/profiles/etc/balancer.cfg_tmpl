@@ -1,0 +1,36 @@
+#==============================================================================
+# Load balancing server configuration file
+#==============================================================================
+# Build and configure a load balancing server.
+# - Build pound
+# - Configure pound
+
+[buildout]
+parts = balancer-build
+        balancer
+
+#==============================================================================
+# Build pound
+#==============================================================================
+
+[balancer-build]
+# may require libssl-dev
+recipe = plone.recipe.pound:build
+url = \${downloads:pound}
+owner = \${users:balancer}
+group = \${users:balancer}
+
+#==============================================================================
+# Configure pound
+#==============================================================================
+
+[balancer]
+recipe = plone.recipe.pound:config
+## Run as a daemon to let supervisord manage
+daemon = 0
+timeout = 300
+log_level = 3
+owner = \${users:balancer}
+group = \${users:balancer}
+balancers =
+  \${hosts:main} \${hosts:balancer}:\${ports:balancer} \${hosts:instance1}:\${ports:instance1},1,30 \${hosts:instance2}:\${ports:instance2},1,60

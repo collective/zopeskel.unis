@@ -1,0 +1,34 @@
+#==============================================================================
+# Base deployment buildout
+#==============================================================================
+# Base buildout configuration for ${customer}
+
+[buildout]
+# Change the number here to change the version of Plone being used
+extends =
+    http://download.zope.org/Zope2/index/${zope2_version}/versions.cfg
+    http://dist.plone.org/release/${plone_version}/versions.cfg
+    defines.cfg
+    project.cfg
+    versions.cfg
+
+parts =
+    PIL
+
+# Add additional egg download sources here. dist.plone.org contains archives
+# of Plone packages.
+find-links =
+    http://dist.plone.org
+    http://dist.plone.org/thirdparty
+    http://download.zope.org/ppix/
+    http://download.zope.org/distribution/
+    http://effbot.org/downloads
+
+versions = versions
+
+extensions = buildout.dumppickedversions mr.developer lovely.buildouthttp
+
+[PIL]
+recipe = zerokspot.recipe.distutils
+urls =
+    http://dist.repoze.org/PIL-1.1.6.tar.gz

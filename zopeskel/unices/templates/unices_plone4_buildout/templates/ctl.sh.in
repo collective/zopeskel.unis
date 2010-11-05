@@ -1,0 +1,34 @@
+#!/bin/sh
+export HOME="${buildout:directory}"
+
+supstart () {
+        if [ ! -f $HOME/var/supervisord.pid ] ; then
+                $HOME/bin/supervisord --pidfile $HOME/var/supervisord.pid || return $?
+        fi
+        $HOME/bin/supervisorctl $1 all
+}
+supstop () {
+        $HOME/bin/supervisorctl stop all || return $?
+        if [ -f $HOME/var/supervisord.pid ] ; then
+                kill `cat $HOME/var/supervisord.pid`
+        fi
+}
+case "$1" in
+        start|restart)
+                supstart $1
+        ;;stop)
+                supstop
+        ;;restart-full)
+                supstop && supstart start
+        ;;status)
+                if [ ! -f $HOME/var/supervisord.pid ] ; then
+                        echo "Supervisor n'est pas démarré"
+                else
+                        $HOME/bin/supervisorctl status
+                fi
+        ;; *)
+                echo "Utilisation: $0 [start|stop|restart|restart-full|status]"
+                exit 1
+        ;;
+esac
+exit $?

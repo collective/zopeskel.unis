@@ -1,0 +1,47 @@
+#==============================================================================
+# Backup and Pack configuration
+#==============================================================================
+
+#  This configures the backup :
+#   - keep the 10 last backups
+#   - backups are gzip
+#   - backup directory at the root of buildout directory
+
+# Cronjob
+# crontab -e  Edit your crontab file.
+# crontab -l  Show your crontab file.
+# crontab -r  Remove your crontab file.
+
+[buildout]
+parts = backup
+        backupcronjob
+        snapshotcronjob
+        packcronjob
+
+[backup]
+recipe = collective.recipe.backup
+# Location where backups are stored. Defaults to var/backups inside the buildout directory.
+location = \${buildout:directory}/backups
+# Number of full backups to keep. Defaults to 2, which means that the current and the previous full backup are kept. Older backups are removed, including their incremental backups. Set it to 0 to keep all backups.
+keep = 10
+# Location where snapshot defaults are stored. Defaults to var/snapshotbackups inside the buildout directory.
+snapshotlocation = \${buildout:directory}/backups/snapshots
+
+[backupcronjob]
+recipe = z3c.recipe.usercrontab
+# Incremental backup every day at 3 am
+times = 0 3 * * *
+command = \${buildout:directory}/bin/backup
+
+[snapshotcronjob]
+recipe = z3c.recipe.usercrontab
+# make a snapshot every 1st of month at 5 am
+times = 0 5 1 * *
+command = \${buildout:directory}/bin/snapshotbackup
+
+[packcronjob]
+recipe = z3c.recipe.usercrontab
+# pack the database every sunday at 5am
+times = 0 5 1 * 0
+command = \${buildout:directory}/bin/zeopack
+

@@ -1,0 +1,39 @@
+#==============================================================================
+# HTTP server configuration file
+#==============================================================================
+# - HTTP server installed on filesystem
+# - Generate apache virtualhost
+
+[buildout]
+parts = apache
+
+#==============================================================================
+# Configure front-end web server
+#==============================================================================
+# Apache should be built on system.
+
+# Vhost generation
+[apache]
+recipe = plone.recipe.apache:config
+bind = \${ports:main}
+backends = \${hosts:main}:\${hosts:cache}:\${ports:cache}
+zope2_vhm_map = \${hosts:main}:/\${plone-sites:main}
+resource-expires =
+      \.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$:"access plus 2 days"
+resource-headers =
+      \.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$:Cache-Control:"max-age=172800, public, must-revalidate"
+extras = 
+    SetOutputFilter DEFLATE
+
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+
+    SetEnvIfNoCase Request_URI \
+      \.(?:gif|jpe?g|png|zip|tgz|gz|rar|ace)$ no-gzip dont-vary
+    SetEnvIfNoCase Request_URI \
+      \/(?:image)$ no-gzip dont-vary
+
+    DeflateFilterNote Input instream
+    DeflateFilterNote Output outstream
+    DeflateFilterNote Ratio ratio

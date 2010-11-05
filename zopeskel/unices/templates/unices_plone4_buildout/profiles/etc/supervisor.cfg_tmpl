@@ -1,0 +1,47 @@
+#==============================================================================
+# Unix processes : control and monitor
+#==============================================================================
+# - build supervisor
+# - create a ctl script used on server restart
+# - set the ctl script executable
+
+[buildout]
+parts = supervisor
+        ctl_script
+        executable
+
+#==============================================================================
+# Managment scripts
+#==============================================================================
+[ctl_script]
+recipe = collective.recipe.template
+input = \${buildout:directory}/templates/ctl.sh.in
+output = \${buildout:directory}/bin/ctl.sh
+
+#==============================================================================
+# One supervisor to rulez them all
+#==============================================================================
+# Supervisor is a client/server system that allows its users to monitor and 
+# control a number of processes on UNIX-like operating systems.
+[supervisor]
+# For more information on this step and configuration options see:
+# http://pypi.python.org/pypi/collective.recipe.supervisor
+recipe = collective.recipe.supervisor
+port = \${ports:supervisor}
+user = \${supervisor-settings:user}
+password = \${supervisor-settings:password}
+serverurl = http://\${hosts:supervisor}:\${ports:supervisor}
+programs =
+    10 zeo       (autostart=true)              \${zeoserver:location}/bin/runzeo                          true \${users:zope}
+    20 instance1 (autostart=true startsecs=10) \${buildout:bin-directory}/instance1 [console]             true \${users:zope}
+    20 instance2 (autostart=true startsecs=10) \${buildout:bin-directory}/instance2 [console]             true \${users:zope}
+    30 cache     (autostart=true)              \${buildout:directory}/bin/cache                           true \${users:cache}
+    40 balancer  (autostart=true)              \${buildout:directory}/bin/poundrun \${buildout:directory} true \${users:balancer}
+
+#==============================================================================
+# System command to give executable permissions on script
+#==============================================================================
+[executable]
+recipe = plone.recipe.command
+command = chmod +x \${ctl_script:output}
+update-command = chmod +x \${ctl_script:output}

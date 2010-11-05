@@ -1,0 +1,24 @@
+#==============================================================================
+# Zope instance base settings
+#==============================================================================
+# This settings should be used for production and overwritten for preproduction
+
+[instance-settings]
+# For more information on this step and configuration options see:
+# http://pypi.python.org/pypi/plone.recipe.zope2instance
+eggs = \${project-settings:eggs}
+zcml = \${project-settings:zcml}
+products = \${project-settings:products}
+user = admin:admin
+zserver-threads = 2
+zodb-cache-size = 20000
+zeo-client-cache-size = 300MB
+debug-mode = off
+verbose-security = off
+zeo-client = on
+zeo-address = \${zeoserver:zeo-address}
+effective-user = \${users:zope}
+http-address = \$\${:http-address}
+# Set shared-blob to off when ZEO clients are on different physical servers
+shared-blob = on
+blob-storage = \${buildout:directory}/var/blobstorage

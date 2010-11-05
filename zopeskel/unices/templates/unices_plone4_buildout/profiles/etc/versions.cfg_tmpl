@@ -1,0 +1,21 @@
+#==============================================================================
+# Pinned version !
+#==============================================================================
+
+# Download urls - encapsulate Zope, Varnish and pound versions
+[downloads]
+pound = http://www.apsis.ch/pound/Pound-2.5.tgz
+varnish = http://downloads.sourceforge.net/varnish/varnish-2.1.3.tar.gz
+squid = http://www.squid-cache.org/Versions/v3/3.1/squid-3.1.7.tar.gz
+
+# Versions - Define eggs version
+[versions]
+zc.buildout = 1.5.2
+plone.recipe.varnish = 1.1
+plone.recipe.apache = 0.3.2
+zope.schema = 3.6.0
+zope.interface = 3.6.1
+zope.testing = 3.10.0
+zope.exceptions = 3.6.1
+docutils = 0.7
+supervisor = 3.0a9

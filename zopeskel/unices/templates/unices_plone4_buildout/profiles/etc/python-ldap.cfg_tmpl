@@ -1,0 +1,27 @@
+#==============================================================================
+# Python-LDAP
+#==============================================================================
+# Debian ETCH : Python-LDAP
+# install python-ldap egg (v2.3.5) using a compiled openldap
+
+[buildout]
+parts = openldap
+        python-ldap
+
+# found at : http://bluedynamics.com/articles/jens/python-ldap-as-egg-with-buildout
+# build openldap to build python-ldap 2.3.5 egg
+# may need aptitude install libdb4.4-dev libsasl2-dev libssl-dev
+[openldap]
+recipe = zc.recipe.cmmi
+url = http://www.openldap.org/software/download/OpenLDAP/openldap-stable/openldap-stable-20100219.tgz
+extra_options = --with-sasl --with-tls --enable-slapd=no
+
+[python-ldap]
+recipe = zc.recipe.egg:custom
+egg = python-ldap
+include-dirs  =
+        \${openldap:location}/include
+library-dirs  =
+        \${openldap:location}/lib
+rpath =
+        \${openldap:location}/lib

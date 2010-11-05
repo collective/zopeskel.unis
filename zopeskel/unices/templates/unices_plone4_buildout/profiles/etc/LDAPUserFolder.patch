@@ -1,0 +1,11 @@
+--- Products/LDAPUserFolder/utils.py
++++ Products/LDAPUserFolder/utils.py
+@@ -59,7 +59,7 @@
+                              ]
+                             )
+ 
+-encoding = 'latin1'
++encoding = 'utf8'
+ 
+ 
+ #################################################

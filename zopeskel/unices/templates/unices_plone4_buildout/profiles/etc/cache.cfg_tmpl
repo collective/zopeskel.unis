@@ -1,0 +1,70 @@
+#==============================================================================
+# Cache server configuration file
+#==============================================================================
+# - Build cache
+# - Configure cache
+
+#if $cache_utility == 'varnish'
+
+#==============================================================================
+#
+#  VARNISH
+#
+#==============================================================================
+[buildout]
+parts = cache-build
+        cache
+
+#==============================================================================
+# Build Varnish
+#==============================================================================
+
+[cache-build]
+recipe = zc.recipe.cmmi
+url = \${downloads:varnish}
+
+#==============================================================================
+# Configure Varnish for Plone
+#==============================================================================
+
+[cache]
+# For more information on this step and configuration options see:
+# http://pypi.python.org/pypi/plone.recipe.varnish
+recipe = plone.recipe.varnish
+daemon = \${buildout:directory}/parts/cache-build/sbin/varnishd
+bind = \${hosts:cache}:\${ports:cache}
+backends = \${hosts:balancer}:\${ports:balancer}
+cache-size = 1G
+user = \${users:cache}
+mode = foreground
+zope2_vhm_map =
+    \${hosts:main}:/\${plone-sites:main}
+
+#end if
+#if $cache_utility == 'squid'
+#==============================================================================
+#
+#  SQUID
+#
+#==============================================================================
+
+[buildout]
+parts =
+    cache-build
+    cache-conf
+
+[versions]
+iw.recipe.squid = 1.0
+
+[cache-build]
+recipe = zc.recipe.cmmi
+url = \${downloads:squid}
+
+[cache-conf]
+recipe = iw.recipe.squid
+bind = \${hosts:cache}:\${ports:cache}
+backends = \${hosts:balancer}:\${ports:balancer}
+cache-size = 1000
+user = \${users:cache}
+
+#end if

@@ -1,0 +1,14 @@
+#==============================================================================
+# Project packages
+#==============================================================================
+[project-settings]
+eggs = Zope2
+       Plone
+       PIL
+
+zcml =
+
+products = \${buildout:directory}/products
+
+develop =
+

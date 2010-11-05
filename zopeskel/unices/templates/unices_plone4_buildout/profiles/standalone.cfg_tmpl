@@ -1,0 +1,96 @@
+#==============================================================================
+# Standalone configuration file for ${customer}:${project} portal
+#==============================================================================
+
+# Standalone configuration file
+# =============================
+# - One instance running
+# - All debugging tools and settings ready
+
+# Ports configuration
+# ===================
+# zope server (8080)
+
+[buildout]
+extends = etc/base.cfg etc/http.cfg
+newest = false
+develop = \${project-settings:develop}
+parts += instance
+         omelette
+
+extensions = buildout.dumppickedversions mr.developer lovely.buildouthttp
+
+
+#==============================================================================
+# Use some usefull developpement packages and under dev packages
+#==============================================================================
+[project-settings]
+eggs += plone.reload
+        Products.Gloworm
+        Products.PDBDebugMode
+        Products.DocFinderTab
+        Products.DCWorkflowGraph
+        collective.workflowed
+
+zcml += plone.reload
+        Products.Gloworm
+
+#==============================================================================
+# Configure developpement ports and ips
+#==============================================================================
+
+[ports]
+instance = 8080
+
+[hosts]
+instance = 0.0.0.0
+
+[plone-sites]
+main = site
+
+#==============================================================================
+# Zope - instance configuration
+#==============================================================================
+[instance]
+# For more information on this step and configuration options see:
+# http://pypi.python.org/pypi/plone.recipe.zope2instance
+recipe = plone.recipe.zope2instance
+user = admin:admin
+zodb-cache-size = 2500
+http-address = \${hosts:instance}:\${ports:instance}
+debug-mode = on
+verbose-security = on
+blob-storage = var/blobstorage
+effective-user = \${users:zope}
+
+environment-vars =
+    zope_i18n_compile_mo_files = true
+
+# If you want Zope to know about any additional eggs, list them here.
+# This should include any development eggs you listed in develop-eggs above,
+# e.g. eggs = Plone my.package
+eggs = \${project-settings:eggs}
+
+# If you want to register ZCML slugs for any packages, list them here.
+# e.g. zcml = my.package my.other.package
+zcml = \${project-settings:zcml}
+
+products = \${project-settings:products}
+
+
+#==============================================================================
+# Debugging tools - preconfigured python interpreter and omelette
+#==============================================================================
+
+[zopepy]
+# For more information on this step and configuration options see:
+# http://pypi.python.org/pypi/zc.recipe.egg
+recipe = zc.recipe.egg
+eggs = \${instance:eggs}
+interpreter = zopepy
+scripts = zopepy
+
+[omelette]
+recipe = collective.recipe.omelette
+eggs = \${instance:eggs}
+products = \${instance:products}

@@ -1,0 +1,8 @@
+bin
+dev
+develop-eggs
+eggs
+parts
+*.egg-info
+.*
+!.gitignore

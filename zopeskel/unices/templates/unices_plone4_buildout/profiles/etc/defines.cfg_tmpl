@@ -1,0 +1,55 @@
+#==============================================================================
+# Configuration
+#==============================================================================
+# Define the most of the configuration variables used in the buildout.
+
+
+# Default settings for supervisor
+# -------------------------------
+[supervisor-settings]
+user = admin
+password = admin
+
+# Plone sites - used in VirtualHost configuration
+# -----------------------------------------------
+[plone-sites]
+# main => the main plone site id
+main = ${project}
+
+# Hostnames for various servers.
+# ------------------------------
+# 'main' is the public hostname.
+
+[hosts]
+main = ${customer}-${project}.localdomain
+main_ip = 127.0.0.1
+cache = 127.0.0.1
+supervisor = 127.0.0.1
+balancer = 127.0.0.1
+instance = 172.29.0.10
+instance1 = 127.0.0.1
+instance2 = 0.0.0.0
+zeo-server = 127.0.0.1
+
+# Ports for various servers
+# -------------------------
+# 'main' is the public hostname.
+
+[ports]
+main = 80
+cache = 8101
+balancer = 8201
+zeo-server = 8301
+instance = 8401
+instance1 = 8401
+instance2 = 8402
+supervisor = 9001
+
+# OS users to drop to for various processes
+# -----------------------------------------
+[users]
+main = zope
+cache = zope
+balancer = zope
+zope = zope
+supervisor = zope

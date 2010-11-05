@@ -1,0 +1,86 @@
+#==============================================================================
+# Pre Production configuration file for ${customer}:${project} portal
+#==============================================================================
+
+# Zopeskel Pre-production configuration file
+# ========================================
+# - Server : QI
+# - Zope installed on filesystem
+# - Zeo server and one zeo client running
+# - A virtualhost based on template : client-project.preprod.localdomain
+
+# Ports configuration
+# ===================
+# QI server
+# supervisor (${supervisor_locprep})
+# client (80) => apache (${cache_locprep})=> varnish (${balancer_locprep}) => pound => zeo client (${zeoclient_locprep_1}) => zeo server (${zeoserv_locprep})
+
+[buildout]
+extends = ./etc/base.cfg ./etc/instance-settings.cfg ./etc/cache.cfg ./etc/balancer.cfg ./etc/supervisor.cfg ./etc/http.cfg
+newest = false
+
+parts += zeoserver
+         instance1
+
+#==============================================================================
+# Packages
+#==============================================================================
+[versions]
+
+#==============================================================================
+# Defines
+#==============================================================================
+[ports]
+main = 80
+cache = ${cache_locprep}
+balancer = ${balancer_locprep}
+zeo-server = ${zeoserv_locprep}
+instance1 = ${zeoclient_locprep_1}
+supervisor = ${supervisor_locprep}
+
+[hosts]
+main = ${customer}-${project}.preprod.${localdomain}
+cache = 127.0.0.1
+supervisor = 127.0.0.1
+balancer = 127.0.0.1
+instance1 = 0.0.0.0
+
+[plone-sites]
+main = site
+
+#==============================================================================
+# Apache - virtualhost configuration
+#==============================================================================
+
+[apache]
+mainconfig = /etc/apache2/vhosts/zope/preprod-vhosts.conf
+
+#==============================================================================
+# Zope - Zeo server and instances configuration
+#==============================================================================
+[zeoserver]
+# For more information on this step and configuration options see:
+# http://pypi.python.org/pypi/plone.recipe.zeoserver
+recipe = plone.recipe.zeoserver
+zeo-address = \${hosts:zeo-server}:\${ports:zeo-server}
+effective-user = \${users:zope}
+blob-storage = \${buildout:directory}/var/blobstorage
+pack-days = 7
+
+[instance-settings]
+zserver-threads = 1
+zodb-cache-size = 2500
+zeo-client-cache-size = 100MB
+debug-mode = off
+verbose-security = on
+
+[instance1]
+<=instance-settings
+recipe = plone.recipe.zope2instance
+http-address = \${hosts:instance1}:\${ports:instance1}
+
+#==============================================================================
+# Configure Varnish for Plone
+#==============================================================================
+[cache]
+cache-size = 50MB
