@@ -1,7 +1,7 @@
 import copy
 import os
 
-from zopeskel.unices.abstract_buildout import AbstractBuildout
+from zopeskel.unis.abstract_buildout import AbstractBuildout
 
 from zopeskel.base import BaseTemplate
 from zopeskel.base import var, EASY, EXPERT
@@ -92,7 +92,7 @@ This option lets you select your cache utility. It will also generate a default 
 """)
 
 class ZopeskelPlone4Buildout(AbstractBuildout):
-    _template_dir = 'templates/unices_plone4_buildout'
+    _template_dir = 'templates/unis_plone4_buildout'
     summary = "A buildout for Plone 4.x"
     help = """
 This template creates a Plone 4 buildout based on the best practices of Quadra-Informatique

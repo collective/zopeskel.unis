@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2010 'Quadra Informatique'
-# Copyright (c) 2010 'ENS Lyon - UNICES'
+# Copyright (c) 2010 'ENS Lyon - UNIS'
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,14 +16,14 @@
 # along with this program; see the file COPYING. If not, write to the
 # Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 """
-This module contains the tool of zopeskel.unices
+This module contains the tool of zopeskel.unis
 """
 import os
 from setuptools import setup, find_packages
 
 version = '1.0'
 
-setup(name='zopeskel.unices',
+setup(name='zopeskel.unis',
       version=version,
       description="Different kind of buildout templates used by Quadra-Informatique",
       long_description=open("README.txt").read() + "\n" +
@@ -35,7 +35,7 @@ setup(name='zopeskel.unices',
       keywords='',
       author='Quadra-Informatique',
       author_email='plone@quadra-informatique.fr',
-      url='http://svn.plone.org/svn/collective/',
+      url='http://github.com/collective/zopeskel.unis',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['zopeskel'],
@@ -52,6 +52,6 @@ setup(name='zopeskel.unices',
       entry_points="""
       # -*- Entry points: -*-
       [paste.paster_create_template]
-      unices_plone4_buildout = zopeskel.unices.templates:UnicesPlone4Buildout
+      unis_plone4_buildout = zopeskel.unis.templates:UnisPlone4Buildout
       """,
       )

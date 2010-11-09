@@ -11,8 +11,8 @@ The docs directory contains all necessary steps about server configuration
 before to install this egg. These documents can be distributed separately under
 the specified license in each of them. 
 
-These templates was initiated by the Unices Team of the ENS de Lyon 
-<unices@ens-lyon.fr> and by Quadra Informatique <plone@quadra-informatique.fr>.
+These templates was initiated by the UNIS Team of the ENS de Lyon 
+<unis@ens-lyon.fr> and by Quadra Informatique <plone@quadra-informatique.fr>.
 
 The CECILL-B license is a BSD like license. The english and the french version 
 are available in this directory. If you want to make patch or to send us a
