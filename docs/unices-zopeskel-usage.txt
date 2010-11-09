@@ -1,0 +1,39 @@
+
+Unices Skells Usage
+===================
+
+Skells allows you to quickly configure a new project following its need.
+
+
+
+Project preparation
+-------------------
+
+::
+
+  cd ~/
+  mkdir project
+  cd project
+  /opt/python/python2.6/bin/virtualenv .
+  source bin/activate
+
+At this step verify that your Python interpreter is a python 2.6
+
+::
+  
+  $ python
+  Python 2.6.6 (r266:84292, Nov  9 2010, 04:51:52)
+  ...
+
+Now you can install our architecture dependencies for Plone 4
+
+::
+
+  easy_install python-ldap
+  easy_install psycopg2
+  easy_install lxml==2.2.8
+  easy_install celementtree
+  easy_install ZopeSkel
+  easy_install zopeskel.unices
+
+
