@@ -1,0 +1,210 @@
+======================================================
+Installation of a Plone 4 architecture on Debian Lenny
+======================================================
+
+:Info: See <https://github.com/collective/zopeskel.unices> for more informations
+:Author: Encolpe DEGOUTE <encolpe.degoute@quadra-informatique.fr>
+:Description: This is a "docinfo block", or bibliographic field list
+
+Introduction
+============
+
+This installation is specific to Debian Lenny 64bits. For this documentation
+the hostname is `debian` and the network domain is `localdomain`. 
+
+This is a scalable architecture: a lot of software installed are not describe 
+in the basic plone installation. How is it scalable? If you
+need to support more reader connections you can add more zope instances 
+connected to the postgresql cluster; If you need to support more writing users 
+you can add more postgresql servers in your cluster. If you have a simple site
+a configuration with one postgresql server and two zope instances should be 
+enough.
+
+OS Installation
+===============
+
+First steps
+-----------
+
+The installation starts from the last netinst CDROM boot.
+
+* We choose the graphical installation with our locale language
+* The network is acquired by the DHCP method
+* For the disk partition choose `Assisted with LVM` then `All in a single 
+  partition`. This should avoid problem with too little `/tmp` partition in
+  the future.
+* Apply this modification and go to the next step.                              
+* Create a simple root password to take care of a possible bug in the keyboard
+  configuration. 
+* Create le 'Local admin' user.
+* In the task selection choose : web server, SQL databases and simple
+  installation. It will take times to download and install packages at this
+  step.
+* Install Grub
+* Reboot
+
+OS Configuration
+----------------
+
+All the following commands need to be logged as root or with sudo.
+
+Debian Backports
+~~~~~~~~~~~~~~~~
+
+Add backports to your sources.list
+
+* Add this line to your *sources.list* (or add a new file
+  to /etc/apt/sources.list.d/)::
+
+    deb http://backports.debian.org/debian-backports lenny-backports main
+
+* Create a */etc/apt/preferences* file with these three lines::
+
+    Package: *
+    Pin: release a=lenny-backports
+    Pin-Priority: 999
+
+   
+* Run apt-get update
+
+* Run apt-get upgrade
+
+This last command should propose you to update PostgreSQL that is the targeted
+goal.
+
+See `Debian Backports site`_ for more information.
+
+.. _`Debian Backports site`: http://backports.debian.org/Instructions
+
+
+Architecture requirement
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+We will have to build zc.buildout and Python. With python we have three modules
+needed everywhere: python-imaging, python-ldap and python lxml binding.
+
+* build-essential 
+
+* python-dev       
+
+* python-imaging
+
+* python-lxml
+
+* python-ldap
+
+* python-celementree
+
+* python-cjson
+
+* libssl-dev
+
+* libsasl2-dev
+
+* libldap2-dev
+
+* libgif-dev
+
+* libjpeg62-dev
+
+* libpng12-dev
+
+* libxml2-dev
+
+* libxlst1-dev
+
+
+*Memcached* is a ramcache helper for distributed application. We use it between
+zope instances to reduce session overheads.
+
+* memcached
+
+* libmemcache-dev
+
+
+We choose *PostgreSQL 8.4* to simplify the migration on Debian Sqeeze.
+
+* python-psycopg2
+
+* postgresql-8.4
+
+* postgresql-contrib-8.4
+
+* postgresql-8.4-slony1
+
+* postgresql-server-dev-8.4
+
+* pidentd
+
+
+Plone requirements
+~~~~~~~~~~~~~~~~~~
+
+Unless python modules these requirements are there for specific needs: document
+conversion to html (preview) and to text (indexing).  
+
+* lynx
+
+* tidy
+
+* xsltproc
+
+* xpdf
+
+* wv
+
+Developper tools
+~~~~~~~~~~~~~~~~
+
+* vim-python
+
+* git
+
+* mercurial
+
+* subversion
+
+* graphviz
+
+
+Python Sandbox Installation
+---------------------------
+
+The goal of zc.buildout is to create an application sandbox to be able to use 
+specific versions of python modules. 
+
+Python 2.6 installation
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Zope 2.12 used by Plone dropped the Python 2.5 support to concentrate all 
+effort on Python 2.6. Debian Squeeze contains this version. The Plone Community
+have a buildout to build all python version for Plone.
+
+::
+
+  easy_install -U setuptools
+  easy_install zc.buildout==1.4.4
+  cd /opt
+  svn checkout http://svn.plone.org/svn/collective/buildout/python
+  cd python
+  python boostrap.py
+  bin/buildout
+
+
+We will need to have a virtualenv installed in there to be able to duplicate 
+Python2.6 installation quickly.
+
+::
+
+  cd /opt/python/python2.6
+  source bin/activate
+  easy_install virtualenv
+
+
+Finalization
+------------
+
+As Zope, varnish and HAproxy don't need superuser rights we must create an user 
+to install the application in the userspace. You should call it `zope` or 
+`plone`.
+
