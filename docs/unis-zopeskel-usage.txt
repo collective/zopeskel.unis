@@ -1,5 +1,5 @@
 
-Unices Skells Usage
+UNIS Skells Usage
 ===================
 
 Skells allows you to quickly configure a new project following its need.
@@ -34,6 +34,6 @@ Now you can install our architecture dependencies for Plone 4
   easy_install lxml==2.2.8
   easy_install celementtree
   easy_install ZopeSkel
-  easy_install zopeskel.unices
+  easy_install zopeskel.unis
 
 
