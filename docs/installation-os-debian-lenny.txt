@@ -20,6 +20,8 @@ you can add more postgresql servers in your cluster. If you have a simple site
 a configuration with one postgresql server and two zope instances should be 
 enough.
 
+You should plan half a day for the server installation with the Python 2.6.
+
 OS Installation
 ===============
 
