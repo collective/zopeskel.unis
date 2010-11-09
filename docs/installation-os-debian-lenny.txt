@@ -83,11 +83,13 @@ Architecture requirement
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 We will have to build zc.buildout and Python. With python we have three modules
-needed everywhere: python-imaging, python-ldap and python lxml binding.
+needed everywhere: python-imaging, python-ldap and python libxml2 binding.
 
 * build-essential 
 
-* python-dev       
+* python-dev
+
+* python-setuptools 
 
 * python-imaging
 
@@ -172,15 +174,23 @@ Developper tools
 Python Sandbox Installation
 ---------------------------
 
-The goal of zc.buildout is to create an application sandbox to be able to use 
-specific versions of python modules. 
-
-Python 2.6 installation
-~~~~~~~~~~~~~~~~~~~~~~~
+This step can be optionnal if you only want to use the python installed by the 
+system or if you install your own python version. We recommend to build system
+independant version of Python for Plone hosting to not be impacted if a system
+upgrade turn into a nightmare.
 
 Zope 2.12 used by Plone dropped the Python 2.5 support to concentrate all 
-effort on Python 2.6. Debian Squeeze contains this version. The Plone Community
-have a buildout to build all python version for Plone.
+effort on Python 2.6. Debian Squeeze contains this version. On the other hand 
+Zope 2.10 only runs with Python 2.4 that is only present in Debian Lenny. 
+Debian doesn't propose Python 2.4 and Python 2.6 on the same version. The Plone 
+Community has a buildout to build all python versions for Plone with some 
+dependencies.
+
+
+Python installation
+~~~~~~~~~~~~~~~~~~~
+
+This buildout expect setuptools is installed at least at 0.6.11 version.
 
 ::
 
@@ -210,3 +220,4 @@ As Zope, varnish and HAproxy don't need superuser rights we must create an user
 to install the application in the userspace. You should call it `zope` or 
 `plone`.
 
+The next step is to install zopeskel.unis to deploy your project.
