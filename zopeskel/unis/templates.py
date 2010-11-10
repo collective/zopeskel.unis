@@ -91,7 +91,7 @@ VAR_CACHE_UTILITY = StringChoiceVar(
 This option lets you select your cache utility. It will also generate a default configuration for the utility
 """)
 
-class ZopeskelPlone4Buildout(AbstractBuildout):
+class UnisPlone4Buildout(AbstractBuildout):
     _template_dir = 'templates/unis_plone4_buildout'
     summary = "A buildout for Plone 4.x"
     help = """
