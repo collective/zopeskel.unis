@@ -199,7 +199,7 @@ This buildout expect setuptools is installed at least at 0.6.11 version.
   cd /opt
   svn checkout http://svn.plone.org/svn/collective/buildout/python
   cd python
-  python boostrap.py
+  python bootstrap.py
   bin/buildout
 
 
@@ -208,7 +208,7 @@ Python2.6 installation quickly.
 
 ::
 
-  cd /opt/python/python2.6
+  cd /opt/python/python-2.6
   source bin/activate
   easy_install virtualenv
 
