@@ -1,7 +1,14 @@
 Changelog
 =========
 
-1.0dev (unreleased)
--------------------
+ 1.1   2010-11-10
+-----------------
+
+- Add usage documentation in the package description
+  [encolpe]
+
+ 1.0   2010-11-10
+-----------------
 
 - Initial release
+  [encolpe]
