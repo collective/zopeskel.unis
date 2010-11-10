@@ -27,6 +27,7 @@ setup(name='zopeskel.unis',
       version=version,
       description="Different kind of buildout templates used by Quadra-Informatique",
       long_description=open("README.txt").read() + "\n" +
+                       open('docs/unis-zopeskel-usage.txt').read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
