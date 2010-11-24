@@ -1,34 +1,49 @@
 #!/bin/sh
-export HOME="${buildout:directory}"
+export PROJECTHOME="${buildout:directory}"
 
 supstart () {
-        if [ ! -f $HOME/var/supervisord.pid ] ; then
-                $HOME/bin/supervisord --pidfile $HOME/var/supervisord.pid || return $?
+    if [ -f "$PROJECTHOME/var/supervisord.pid" ] ; then
+        PID=`cat "$PROJECTHOME/var/supervisord.pid"`
+        if [ ! `ps ax | grep $PID | grep 'supervisord.pid$'` ] ; then
+            rm "$PROJECTHOME/var/supervisord.pid"
+            "$PROJECTHOME/bin/supervisord" --pidfile "$PROJECTHOME/var/supervisord.pid" || return $?
         fi
-        $HOME/bin/supervisorctl $1 all
+    else
+        "$PROJECTHOME/bin/supervisord" --pidfile "$PROJECTHOME/var/supervisord.pid" || return $?
+    fi
+    "$PROJECTHOME/bin/supervisorctl" $1 all
 }
+
 supstop () {
-        $HOME/bin/supervisorctl stop all || return $?
-        if [ -f $HOME/var/supervisord.pid ] ; then
-                kill `cat $HOME/var/supervisord.pid`
+    "$PROJECTHOME/bin/supervisorctl" shutdown || return $?
+    sleep 3
+    if [ -f "$PROJECTHOME/var/supervisord.pid" ] ; then
+        kill `cat "$PROJECTHOME/var/supervisord.pid"`
+        sleep 7
+        if [ -f "$PROJECTHOME/var/supervisord.pid" ] ; then
+            kill -9 `cat "$PROJECTHOME/var/supervisord.pid"`
         fi
+        rm "$PROJECTHOME/var/supervisord.pid"
+    fi
 }
+
 case "$1" in
-        start|restart)
-                supstart $1
-        ;;stop)
-                supstop
-        ;;restart-full)
-                supstop && supstart start
-        ;;status)
-                if [ ! -f $HOME/var/supervisord.pid ] ; then
-                        echo "Supervisor n'est pas démarré"
-                else
-                        $HOME/bin/supervisorctl status
-                fi
-        ;; *)
-                echo "Utilisation: $0 [start|stop|restart|restart-full|status]"
-                exit 1
-        ;;
+    start|restart)
+        supstart $1
+    ;;stop)
+        supstop
+    ;;restart-full)
+        supstop && supstart start
+    ;;status)
+        if [ ! -f "$PROJECTHOME/var/supervisord.pid" ] ; then
+            echo "Supervisor n'est pas démarré"
+        else
+            "$PROJECTHOME/bin/supervisorctl" status
+        fi
+    ;; *)
+        echo "Utilisation: $0 [start|stop|restart|restart-full|status]"
+        exit 1
+    ;;
 esac
 exit $?
+
