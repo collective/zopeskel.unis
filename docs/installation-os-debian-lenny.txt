@@ -140,6 +140,12 @@ We choose *PostgreSQL 8.4* to simplify the migration on Debian Sqeeze.
 
 * pidentd
 
+Munin is installed by default on eash node
+
+* munin
+
+* munin-node
+
 
 Plone requirements
 ~~~~~~~~~~~~~~~~~~
