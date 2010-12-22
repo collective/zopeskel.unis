@@ -21,7 +21,7 @@ This module contains the tool of zopeskel.unis
 import os
 from setuptools import setup, find_packages
 
-version = '1.1'
+version = '1.2'
 
 setup(name='zopeskel.unis',
       version=version,
