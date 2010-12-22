@@ -1,12 +1,11 @@
 #==============================================================================
 # Base deployment buildout
 #==============================================================================
-# Base buildout configuration for ${customer}
+# Base buildout configuration for ${project_name}
 
 [buildout]
 # Change the number here to change the version of Plone being used
 extends =
-    http://download.zope.org/Zope2/index/${zope2_version}/versions.cfg
     http://dist.plone.org/release/${plone_version}/versions.cfg
     defines.cfg
     project.cfg
@@ -19,6 +18,7 @@ parts =
 # of Plone packages.
 find-links =
     http://dist.plone.org
+    http://dist.plone.org/release/${plone_version}
     http://dist.plone.org/thirdparty
     http://download.zope.org/ppix/
     http://download.zope.org/distribution/

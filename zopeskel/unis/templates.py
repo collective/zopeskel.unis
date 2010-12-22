@@ -8,18 +8,43 @@ from zopeskel.base import var, EASY, EXPERT
 from zopeskel.vars import StringVar, BooleanVar, IntVar, OnOffVar, BoundedIntVar, StringChoiceVar
 
 #--------------------------------------
-#   Allows to choose the customer name
+#   Allows to choose the Zope version
 #--------------------------------------
 
-VAR_CUSTOMER = StringVar(
-    'customer',
-    title='Customer name',
-    description='',
+VAR_PROJECT = StringVar(
+    'project_name',
+    title='Project Name',
+    description='Project name used to create the directory in the filesystem',
     default='',
-    modes=(EASY,EXPERT),
+    modes=(EASY, EXPERT),
     page='Main',
     help="""
-This is the customer name.
+This is the name used to create the directory where your project will be stored.
+"""
+    )
+
+VAR_DOMAIN = StringVar(
+    'domain_name',
+    title='Domain name',
+    description="Domain name that will be used to access to your Plone",
+    default='dev.plone.localdomain',
+    modes=(EASY, EXPERT),
+    page='Main',
+    help="""
+This is the domain name used to access from external resources to your Plone throught proxy.
+eg: type preproduction.project.plone.yourdomain.com for http://preproduction.project.plone.yourdomain.com
+"""
+    )
+
+VAR_PLONESITE_PATH = StringVar(
+    'plonesite_path',
+    title='Plonesite id in the Zope root',
+    description="Domain name that will be used to access to your Plone",
+    default='site',
+    modes=(EASY, EXPERT),
+    page='Main',
+    help="""
+This is the id of the plone site object in Zope. It is used for
 """
     )
 
@@ -31,8 +56,8 @@ VAR_PLONEVER = StringVar(
     'plone_version',
     title='Plone Version',
     description='Plone version # to install',
-    default='4.0.1',
-    modes=(EXPERT),
+    default='4.0.2',
+    modes=(EASY, EXPERT),
     page='Main',
     help="""
 This is the version of Plone that will be used for this buildout.
@@ -40,20 +65,58 @@ You should enter the version number you wish to use.
 """
     )
 
-#--------------------------------------
-#   Allows to choose the Zope version
-#--------------------------------------
+VAR_INSTANCE_TYPE = StringChoiceVar(
+    'instance_type',
+    title='Instance Type',
+    description='How do you want to store your ZODB?',
+    page='Main',
+    modes=(EXPERT,),
+    default='filestorage',
+    choices=('filestorage','relstorage'),
+    help="""
+This option lets you select your ZODB storage mode.
+The RelStorage store all data in a relational database instead of a single file.
+Database supposed to work: PostgreSQL, Oracle, MySQL.
+"""
+    )
 
-VAR_ZOPEVER = StringVar(
-    'zope2_version',
-    title='Zope2 Version',
-    description='Zope version # to install',
-    default='2.12.10',
-    modes=(EXPERT),
+VAR_INSTANCE_ENUM = BoundedIntVar(
+    'instance_enum',
+    title='Number of instances',
+    description='Number of instances managed in the cluster',
+    default='1',
+    modes=(EXPERT,),
     page='Main',
     help="""
-This is the version of Zope that will be used for this buildout.
-You should enter the version number you wish to use.
+This option let you choose how many client chould be installed in this cluster.
+""",
+    min=1,
+    max=128,
+    )
+
+VAR_SHARED_BLOBS = BooleanVar(
+    'shared_blobs',
+    title='Shared Blobs',
+    description='Do you want to share files stored in blobstorage?',
+    default='true',
+    modes=(EASY, EXPERT),
+    page='Main',
+    help="""
+By default files stored in blobs are shared throught the ZEO server connexion.
+If you activate this option files will be served directly throught the filesystem
+for all clients.
+"""
+)
+
+VAR_MEMCACHE = BooleanVar(
+    'enable_memcache',
+    title='Enable memcache',
+    description="Enable the memcache machinery for let zeo clients shared memory",
+    default='true',
+    modes=(EXPERT,),
+    page='Main',
+    help="""
+Use a memcache server to share RAM between ZEO clients.
 """
     )
 
@@ -66,7 +129,7 @@ VAR_PORTS_STARTING_VALUE = BoundedIntVar(
     title='Ports stating value',
     description='Ports starting value use to generate buildout files',
     default='8080',
-    modes=(EXPERT),
+    modes=(EXPERT,),
     page='Main',
     help="""
 This options lets you select the ports starting value that the configuration will use to generate the instance configuration (instance,zeo,varnish,pound/squid,...).
@@ -82,14 +145,120 @@ This options lets you select the ports starting value that the configuration wil
 VAR_CACHE_UTILITY = StringChoiceVar(
     'cache_utility',
     title='Cache utility',
-    description='Which cache utility would you like? (squid/varnish)?',
+    description='Which cache utility would you like? (Squid/Varnish)?',
     page='Main',
-    modes=(EXPERT),
+    modes=(EXPERT,),
     default='varnish',
     choices=('squid','varnish'),
     help="""
-This option lets you select your cache utility. It will also generate a default configuration for the utility
+This option lets you select your cache utility.
+It will also generate a default configuration for the utility.
 """)
+
+#--------------------------------------
+#   Allows to choose a balancer utility
+#--------------------------------------
+
+VAR_BALANCER_UTILITY = StringChoiceVar(
+    'balancer_utility',
+    title='Balancer utility',
+    description='Which balancer utility would you like? (HAProxy/Pound)?',
+    page='Main',
+    modes=(EXPERT,),
+    default='haproxy',
+    choices=('pound','haproxy'),
+    help="""
+This option lets you select your balancer utility.
+It will also generate a default configuration for the utility.
+""")
+
+#--------------------------------------
+#   Allows to choose a proxy utility
+#--------------------------------------
+
+VAR_PROXY_UTILITY = StringChoiceVar(
+    'proxy_utility',
+    title='Proxy Utility',
+    description='Which proxy utility would you like? (Apache/NGinx)?',
+    page='Main',
+    modes=(EXPERT,),
+    default='apache',
+    choices=('apache','nginx'),
+    help="""
+This option lets you select your proxy utility.
+It will also generate a default configuration for the utility.
+""")
+
+VAR_MUNIN = BooleanVar(
+    'munin',
+    title='Munin activation',
+    description='Do you want munin stats for you instance',
+    default='true',
+    modes=(EXPERT),
+    help="""
+This option install and configure a Munin plugin for zope.
+It supposes that the current server has a munin node installed.
+"""
+)
+
+VAR_DB_TYPE = StringChoiceVar(
+    'db_type',
+    title='Database Connector',
+    description='Which database connector we should use for RelStorage',
+    page='Main',
+    modes=(EXPERT,),
+    default='postgresql',
+    choices=('mysql', 'oracle', 'postgresql'),
+    help="""
+This option install the good python connector for RelStorage.
+"""
+    )
+
+VAR_DB_HOST = StringVar(
+    'db_host',
+    title='Database Host',
+    description="Database server address",
+    page='Main',
+    modes=(EXPERT,),
+    default='127.0.0.1',
+    help="""
+This option should contain the ip address or the domain name of the database server
+"""
+    )
+
+VAR_DB_PORT = StringVar(
+    'db_port',
+    title='Database Port',
+    description="Database server port",
+    page='Main',
+    modes=(EXPERT,),
+    default='5432',
+    help="""
+This option should contain the port of the database server
+"""
+    )
+
+VAR_DB_USERNAME = StringVar(
+    'db_username',
+    title='Database Username',
+    description="Database username",
+    page='Main',
+    modes=(EXPERT,),
+    default='plone',
+    help="""
+"""
+    )
+
+VAR_DB_PASSWORD = StringVar(
+    'db_password',
+    title='Database Password',
+    description="Database password",
+    page='Main',
+    modes=(EXPERT,),
+    default='azerty',
+    help="""
+"""
+    )
 
 class UnisPlone4Buildout(AbstractBuildout):
     _template_dir = 'templates/unis_plone4_buildout'
@@ -138,11 +307,24 @@ See README.txt for details.
 
     vars = copy.deepcopy(AbstractBuildout.vars)
     vars.extend( [
-        VAR_CUSTOMER,
-        VAR_ZOPEVER,
+        VAR_PROJECT,
+        VAR_DOMAIN,
+        VAR_PLONESITE_PATH,
         VAR_PLONEVER,
+        VAR_INSTANCE_TYPE,
+        VAR_DB_TYPE,
+        VAR_DB_HOST,
+        VAR_DB_PORT,
+        VAR_DB_USERNAME,
+        VAR_DB_PASSWORD,
+        VAR_INSTANCE_ENUM,
+        VAR_SHARED_BLOBS,
+        VAR_MEMCACHE,
         VAR_PORTS_STARTING_VALUE,
+        VAR_BALANCER_UTILITY,
         VAR_CACHE_UTILITY,
+        VAR_PROXY_UTILITY,
+        VAR_MUNIN,
     ])
 
     def run(self, command, output_dir, vars):
@@ -160,8 +342,8 @@ See README.txt for details.
         self.post(command, output_dir, vars)
 
     def post(self, command, output_dir, vars):
-        project_folder = "%s.%s"%(str(vars["customer"]).lower(), str(vars["project"]).lower())
+        project_folder = "%s.%s"%(str(vars["project_name"]).lower(), str(vars["project"]).lower())
         os.system('mv %s %s'%(output_dir, project_folder))
 
-        super(ZopeskelPlone4Buildout, self).post(command, project_folder, vars)
+        super(UnisPlone4Buildout, self).post(command, project_folder, vars)
 

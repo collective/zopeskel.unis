@@ -1,5 +1,5 @@
 #==============================================================================
-# Developpement configuration file for ${customer}:${project} portal
+# Developpement configuration file for ${project_name}:${project} portal
 #==============================================================================
 
 # Developpement configuration file
@@ -50,7 +50,7 @@ instance = ${dev_instance}
 cache = 80
 
 [hosts]
-main = ${customer}-${project}.user.localdomain
+main = ${project_name}-${project}.user.localdomain
 
 #==============================================================================
 # Apache - virtualhost configuration

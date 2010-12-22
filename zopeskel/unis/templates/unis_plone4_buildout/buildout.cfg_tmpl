@@ -1,3 +1,3 @@
-# Buildout base for ${customer}
+# Buildout base for ${project_name}
 [buildout]
 extends =

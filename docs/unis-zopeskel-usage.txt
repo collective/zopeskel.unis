@@ -20,7 +20,7 @@ Project preparation
 At this step verify that your Python interpreter is a python 2.6
 
 ::
-  
+
   $ python
   Python 2.6.6 (r266:84292, Nov  9 2010, 04:51:52)
   ...
@@ -36,4 +36,10 @@ Now you can install our architecture dependencies for Plone 4
   easy_install ZopeSkel
   easy_install zopeskel.unis
 
+
+You should create an user in your postgres database
+
+::
+
+  sudo -u postgres createuser -e -d -i -l -P -R -S  plone
 

@@ -21,7 +21,7 @@ main = ${project}
 # 'main' is the public hostname.
 
 [hosts]
-main = ${customer}-${project}.localdomain
+main = ${project_name}-${project}.localdomain
 main_ip = 127.0.0.1
 cache = 127.0.0.1
 supervisor = 127.0.0.1
