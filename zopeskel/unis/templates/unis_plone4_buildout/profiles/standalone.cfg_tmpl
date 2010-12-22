@@ -91,4 +91,3 @@ scripts = zopepy
 [omelette]
 recipe = collective.recipe.omelette
 eggs = \${instance:eggs}
-products = \${instance:products}

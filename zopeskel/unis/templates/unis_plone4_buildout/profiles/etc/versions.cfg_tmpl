@@ -16,7 +16,6 @@ plone.recipe.varnish = 1.1
 plone.recipe.apache = 0.3.2
 zope.schema = 3.6.0
 zope.interface = 3.6.1
-zope.testing = 3.10.0
 zope.exceptions = 3.6.1
 docutils = 0.7
 supervisor = 3.0a9

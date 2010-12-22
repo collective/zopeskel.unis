@@ -57,7 +57,7 @@ main = ${project}-dev.${domain_name}
 #==============================================================================
 
 [apache]
-mainconfig = \${buildout:directory}/user-dev-vhosts.conf
+mainconfig = /etc/apache2/apache2.conf
 backends = \${hosts:main}:\${hosts:instance}:\${ports:instance}
 
 
@@ -104,4 +104,3 @@ scripts = zopepy
 [omelette]
 recipe = collective.recipe.omelette
 eggs = \${instance:eggs}
-products = \${instance:products}
