@@ -21,14 +21,14 @@ main = ${project}
 # 'main' is the public hostname.
 
 [hosts]
-main = ${project_name}-${project}.localdomain
+main = ${project}.${domain_name}
 main_ip = 127.0.0.1
 cache = 127.0.0.1
 supervisor = 127.0.0.1
 balancer = 127.0.0.1
-instance = 172.29.0.10
+instance = 127.0.0.1
 instance1 = 127.0.0.1
-instance2 = 0.0.0.0
+instance2 = 127.0.0.1
 zeo-server = 127.0.0.1
 
 # Ports for various servers

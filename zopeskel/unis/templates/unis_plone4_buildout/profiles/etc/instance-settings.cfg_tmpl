@@ -8,7 +8,6 @@
 # http://pypi.python.org/pypi/plone.recipe.zope2instance
 eggs = \${project-settings:eggs}
 zcml = \${project-settings:zcml}
-products = \${project-settings:products}
 user = admin:admin
 zserver-threads = 2
 zodb-cache-size = 20000

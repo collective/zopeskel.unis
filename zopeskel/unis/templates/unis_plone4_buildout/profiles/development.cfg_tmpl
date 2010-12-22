@@ -1,5 +1,5 @@
 #==============================================================================
-# Developpement configuration file for ${project_name}:${project} portal
+# Developpement configuration file for ${project} portal
 #==============================================================================
 
 # Developpement configuration file
@@ -25,7 +25,7 @@ parts += instance
 extensions = buildout.dumppickedversions mr.developer lovely.buildouthttp
 
 # Downloads storage folder
-download-cache = ../downloads
+download-cache = downloads
 
 #==============================================================================
 # Use some usefull developpement packages and under dev packages
@@ -50,7 +50,7 @@ instance = ${dev_instance}
 cache = 80
 
 [hosts]
-main = ${project_name}-${project}.user.localdomain
+main = ${project}-dev.${domain_name}
 
 #==============================================================================
 # Apache - virtualhost configuration
@@ -87,8 +87,6 @@ eggs = \${project-settings:eggs}
 # If you want to register ZCML slugs for any packages, list them here.
 # e.g. zcml = my.package my.other.package
 zcml = \${project-settings:zcml}
-
-products = \${project-settings:products}
 
 
 #==============================================================================

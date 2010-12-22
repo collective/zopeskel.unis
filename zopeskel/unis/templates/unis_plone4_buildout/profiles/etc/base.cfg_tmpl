@@ -1,7 +1,7 @@
 #==============================================================================
 # Base deployment buildout
 #==============================================================================
-# Base buildout configuration for ${project_name}
+# Base buildout configuration for ${project}
 
 [buildout]
 # Change the number here to change the version of Plone being used
@@ -10,6 +10,10 @@ extends =
     defines.cfg
     project.cfg
     versions.cfg
+    sources.cfg
+#if $app_metnav
+    metnav.cfg
+#end if
 
 parts =
     PIL

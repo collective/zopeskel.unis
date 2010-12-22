@@ -8,7 +8,5 @@ eggs = Zope2
 
 zcml =
 
-products = \${buildout:directory}/products
-
 develop =
 

@@ -1,5 +1,5 @@
 #==============================================================================
-# Standalone configuration file for ${project_name}:${project} portal
+# Standalone configuration file for ${project} portal
 #==============================================================================
 
 # Standalone configuration file
@@ -43,7 +43,7 @@ zcml += plone.reload
 instance = 8080
 
 [hosts]
-instance = 0.0.0.0
+instance = 127.0.0.1
 
 [plone-sites]
 main = site
@@ -74,8 +74,6 @@ eggs = \${project-settings:eggs}
 # If you want to register ZCML slugs for any packages, list them here.
 # e.g. zcml = my.package my.other.package
 zcml = \${project-settings:zcml}
-
-products = \${project-settings:products}
 
 
 #==============================================================================
