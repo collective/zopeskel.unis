@@ -11,18 +11,6 @@ from zopeskel.vars import StringVar, BooleanVar, IntVar, OnOffVar, BoundedIntVar
 #   Allows to choose the Zope version
 #--------------------------------------
 
-VAR_PROJECT = StringVar(
-    'project_name',
-    title='Project Name',
-    description='Project name used to create the directory in the filesystem',
-    default='',
-    modes=(EASY, EXPERT),
-    page='Main',
-    help="""
-This is the name used to create the directory where your project will be stored.
-"""
-    )
-
 VAR_DOMAIN = StringVar(
     'domain_name',
     title='Domain name',
@@ -129,7 +117,7 @@ VAR_PORTS_STARTING_VALUE = BoundedIntVar(
     title='Ports stating value',
     description='Ports starting value use to generate buildout files',
     default='8080',
-    modes=(EXPERT,),
+    modes=(EASY, EXPERT,),
     page='Main',
     help="""
 This options lets you select the ports starting value that the configuration will use to generate the instance configuration (instance,zeo,varnish,pound/squid,...).
@@ -307,7 +295,6 @@ See README.txt for details.
 
     vars = copy.deepcopy(AbstractBuildout.vars)
     vars.extend( [
-        VAR_PROJECT,
         VAR_DOMAIN,
         VAR_PLONESITE_PATH,
         VAR_PLONEVER,
@@ -341,9 +328,8 @@ See README.txt for details.
         self.write_files(command, output_dir, vars)
         self.post(command, output_dir, vars)
 
-    def post(self, command, output_dir, vars):
-        project_folder = "%s.%s"%(str(vars["project_name"]).lower(), str(vars["project"]).lower())
-        os.system('mv %s %s'%(output_dir, project_folder))
+    #def post(self, command, output_dir, vars):
+    #    project_folder = str(vars["project"]).lower()
 
-        super(UnisPlone4Buildout, self).post(command, project_folder, vars)
+    #    super(UnisPlone4Buildout, self).post(command, project_folder, vars)
 
