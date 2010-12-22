@@ -248,6 +248,40 @@ VAR_DB_PASSWORD = StringVar(
 """
     )
 
+VAR_APP_LDAP = BooleanVar(
+    'app_ldap',
+    title='Install LDAP features',
+    description='Do you want to connect a LDAP annuary?',
+    default='false',
+    modes=(EASY, EXPERT),
+    help="""
+This option install all needed LDAP products for Plone.
+It supposes that the current server has a python-ldap installed.
+"""
+)
+
+VAR_APP_CAS = BooleanVar(
+    'app_cass',
+    title='Install CAS features',
+    description='Do you want to connect a CAS SSO?',
+    default='false',
+    modes=(EASY, EXPERT),
+    help="""
+This option install all needed CAS products for Plone.
+"""
+)
+
+VAR_APP_METNAV = BooleanVar(
+    'app_metnav',
+    title='Install Metnav products',
+    description='Do you want to use Metnav features?',
+    default='false',
+    modes=(EASY, EXPERT),
+    help="""
+This option install all needed metnav products for Plone.
+"""
+)
+
 class UnisPlone4Buildout(AbstractBuildout):
     _template_dir = 'templates/unis_plone4_buildout'
     summary = "A buildout for Plone 4.x"
@@ -312,6 +346,9 @@ See README.txt for details.
         VAR_CACHE_UTILITY,
         VAR_PROXY_UTILITY,
         VAR_MUNIN,
+        VAR_APP_LDAP,
+        VAR_APP_CAS,
+        VAR_APP_METNAV,
     ])
 
     def run(self, command, output_dir, vars):
