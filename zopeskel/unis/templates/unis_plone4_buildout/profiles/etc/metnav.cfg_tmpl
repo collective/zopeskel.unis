@@ -1,0 +1,19 @@
+[buildout]
+eggs =
+    elementtree
+
+    Products.eXistDA
+    Products.exist_zope
+
+    metnav
+
+zcml =
+    metnav
+[buildout]
+
+auto-checkout = Products.exist_zope Products.eXistDA metnav
+
+[sources]
+Products.eXistDA    = hg https://bitbucket.org/pratic/products.existda
+metnav              = hg https://bitbucket.org/pratic/metnav
+Products.exist_zope = hg https://bitbucket.org/pratic/products.exist_zope
