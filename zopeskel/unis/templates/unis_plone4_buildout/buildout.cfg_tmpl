@@ -1,3 +1,4 @@
 # Buildout base for ${project}
 [buildout]
-extends =
+extends = profiles/development.cfg
+
