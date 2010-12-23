@@ -3,6 +3,10 @@ eggs +=
     celementtree
     Products.eXistDA
     Products.exist_zope
+    pisa
+    reportlab
+    html5lib
+    z3c.form
     metnav
 
 zcml +=
