@@ -10,14 +10,14 @@ Introduction
 ============
 
 This installation is specific to Debian Lenny 64bits. For this documentation
-the hostname is `debian` and the network domain is `localdomain`. 
+the hostname is `debian` and the network domain is `localdomain`.
 
-This is a scalable architecture: a lot of software installed are not describe 
+This is a scalable architecture: a lot of software installed are not describe
 in the basic plone installation. How is it scalable? If you
-need to support more reader connections you can add more zope instances 
-connected to the postgresql cluster; If you need to support more writing users 
+need to support more reader connections you can add more zope instances
+connected to the postgresql cluster; If you need to support more writing users
 you can add more postgresql servers in your cluster. If you have a simple site
-a configuration with one postgresql server and two zope instances should be 
+a configuration with one postgresql server and two zope instances should be
 enough.
 
 You should plan half a day for the server installation with the Python 2.6.
@@ -32,12 +32,12 @@ The installation starts from the last netinst CDROM boot.
 
 * We choose the graphical installation with our locale language
 * The network is acquired by the DHCP method
-* For the disk partition choose `Assisted with LVM` then `All in a single 
+* For the disk partition choose `Assisted with LVM` then `All in a single
   partition`. This should avoid problem with too little `/tmp` partition in
   the future.
-* Apply this modification and go to the next step.                              
+* Apply this modification and go to the next step.
 * Create a simple root password to take care of a possible bug in the keyboard
-  configuration. 
+  configuration.
 * Create le 'Local admin' user.
 * In the task selection choose : web server, SQL databases and simple
   installation. It will take times to download and install packages at this
@@ -66,7 +66,7 @@ Add backports to your sources.list
     Pin: release a=lenny-backports
     Pin-Priority: 999
 
-   
+
 * Run apt-get update
 
 * Run apt-get upgrade
@@ -85,11 +85,11 @@ Architecture requirement
 We will have to build zc.buildout and Python. With python we have three modules
 needed everywhere: python-imaging, python-ldap and python libxml2 binding.
 
-* build-essential 
+* build-essential
 
 * python-dev
 
-* python-setuptools 
+* python-setuptools
 
 * python-imaging
 
@@ -151,7 +151,7 @@ Plone requirements
 ~~~~~~~~~~~~~~~~~~
 
 Unless python modules these requirements are there for specific needs: document
-conversion to html (preview) and to text (indexing).  
+conversion to html (preview) and to text (indexing).
 
 * lynx
 
@@ -180,36 +180,41 @@ Developper tools
 Python Sandbox Installation
 ---------------------------
 
-This step can be optionnal if you only want to use the python installed by the 
+This step can be optionnal if you only want to use the python installed by the
 system or if you install your own python version. We recommend to build system
 independant version of Python for Plone hosting to not be impacted if a system
 upgrade turn into a nightmare.
 
-Zope 2.12 used by Plone dropped the Python 2.5 support to concentrate all 
-effort on Python 2.6. Debian Squeeze contains this version. On the other hand 
-Zope 2.10 only runs with Python 2.4 that is only present in Debian Lenny. 
-Debian doesn't propose Python 2.4 and Python 2.6 on the same version. The Plone 
-Community has a buildout to build all python versions for Plone with some 
+Zope 2.12 used by Plone dropped the Python 2.5 support to concentrate all
+effort on Python 2.6. Debian Squeeze contains this version. On the other hand
+Zope 2.10 only runs with Python 2.4 that is only present in Debian Lenny.
+Debian doesn't propose Python 2.4 and Python 2.6 on the same version. The Plone
+Community has a buildout to build all python versions for Plone with some
 dependencies.
 
 
 Python installation
 ~~~~~~~~~~~~~~~~~~~
 
+At this step you can choose to compile python in user space or in superuser
+space.
 This buildout expect setuptools is installed at least at 0.6.11 version.
 
 ::
 
-  easy_install -U setuptools
-  easy_install zc.buildout==1.4.4
-  cd /opt
+  sudo adduser --no-create-home --home /opt --disabled-password plone
+  sudo easy_install -U setuptools
+  sudo easy_install zc.buildout==1.4.4
+  sudo mkdir /opt/python /opt/python-envs
+  sudo chown plone:plone /opt/python /opt/python-envs
+  sudo -H -u plone -s
   svn checkout http://svn.plone.org/svn/collective/buildout/python
   cd python
   python bootstrap.py
   bin/buildout
 
 
-We will need to have a virtualenv installed in there to be able to duplicate 
+We will need to have a virtualenv installed in there to be able to duplicate
 Python2.6 installation quickly.
 
 ::
@@ -222,8 +227,8 @@ Python2.6 installation quickly.
 Finalization
 ------------
 
-As Zope, varnish and HAproxy don't need superuser rights we must create an user 
-to install the application in the userspace. You should call it `zope` or 
+As Zope, varnish and HAproxy don't need superuser rights we must create an user
+to install the application in the userspace. You should call it `zope` or
 `plone`.
 
 The next step is to install zopeskel.unis to deploy your project.
