@@ -1,17 +1,16 @@
-[buildout]
-eggs =
-    elementtree
-
+[project-settings]
+eggs +=
+    celementtree
     Products.eXistDA
     Products.exist_zope
-
     metnav
 
-zcml =
+zcml +=
     metnav
+
 [buildout]
 
-auto-checkout = Products.exist_zope Products.eXistDA metnav
+auto-checkout += Products.exist_zope Products.eXistDA metnav
 
 [sources]
 Products.eXistDA    = hg https://bitbucket.org/pratic/products.existda

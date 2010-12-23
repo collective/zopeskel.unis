@@ -4,6 +4,8 @@
 # Base buildout configuration for ${project}
 
 [buildout]
+extensions = buildout.dumppickedversions mr.developer lovely.buildouthttp
+
 # Change the number here to change the version of Plone being used
 extends =
     http://dist.plone.org/release/${plone_version}/versions.cfg
@@ -29,8 +31,6 @@ find-links =
     http://effbot.org/downloads
 
 versions = versions
-
-extensions = buildout.dumppickedversions mr.developer lovely.buildouthttp
 
 [PIL]
 recipe = zerokspot.recipe.distutils

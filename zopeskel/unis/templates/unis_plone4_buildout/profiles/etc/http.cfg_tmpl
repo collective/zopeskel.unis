@@ -5,7 +5,7 @@
 # - Generate apache virtualhost
 
 [buildout]
-parts = apache
+parts += apache
 
 #==============================================================================
 # Configure front-end web server
@@ -22,7 +22,7 @@ resource-expires =
       \.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$:"access plus 2 days"
 resource-headers =
       \.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$:Cache-Control:"max-age=172800, public, must-revalidate"
-extras = 
+extras =
     SetOutputFilter DEFLATE
 
     BrowserMatch ^Mozilla/4 gzip-only-text/html

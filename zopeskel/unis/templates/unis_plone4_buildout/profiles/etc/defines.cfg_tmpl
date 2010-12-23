@@ -14,7 +14,7 @@ password = admin
 # -----------------------------------------------
 [plone-sites]
 # main => the main plone site id
-main = ${project}
+main = ${plonesite_path}
 
 # Hostnames for various servers.
 # ------------------------------
