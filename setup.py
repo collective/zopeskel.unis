@@ -54,7 +54,6 @@ setup(name='zopeskel.unis',
           'PasteScript',
           'Cheetah>1.0,<=2.2.1',
           'ZopeSkel',
-          'zope.testing'
       ],
       entry_points="""
       # -*- Entry points: -*-
