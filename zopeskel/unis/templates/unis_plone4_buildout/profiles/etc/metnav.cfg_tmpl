@@ -1,8 +1,7 @@
 [project-settings]
 eggs +=
     celementtree
-    Products.eXistDA
-    Products.exist_zope
+    enslyon.existda
     pisa
     reportlab
     html5lib
@@ -11,12 +10,12 @@ eggs +=
 
 zcml +=
     metnav
+    enslyon.existda
 
 [buildout]
 
-auto-checkout += Products.exist_zope Products.eXistDA metnav
+auto-checkout += enslyon.existda metnav
 
 [sources]
-Products.eXistDA    = hg https://bitbucket.org/pratic/products.existda
-metnav              = hg https://bitbucket.org/pratic/metnav
-Products.exist_zope = hg https://bitbucket.org/pratic/products.exist_zope
+metnav          = hg https://bitbucket.org/pratic/metnav
+enslyon.existda = hg https://bitbucket.org/pratic/enslyon.existda
