@@ -115,7 +115,7 @@ needed everywhere: python-imaging, python-ldap and python libxml2 binding.
 
 * libxml2-dev
 
-* libxlst1-dev
+* libxslt1-dev
 
 
 *Memcached* is a ramcache helper for distributed application. We use it between
@@ -232,3 +232,10 @@ to install the application in the userspace. You should call it `zope` or
 `plone`.
 
 The next step is to install zopeskel.unis to deploy your project.
+
+If you want to be able to store ZODB in a PostgreSQL database you should  create
+an user in your postgres database
+
+::
+
+  sudo -u postgres createuser -e -d -i -l -P -R -S  plone

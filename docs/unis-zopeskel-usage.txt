@@ -1,8 +1,8 @@
 
-UNIS Skells Usage
+UNIS Skels Usage
 ===================
 
-Skells allows you to quickly configure a new project following its need.
+Skels allows you to quickly configure a new project following its need.
 
 
 
@@ -11,10 +11,10 @@ Project preparation
 
 ::
 
-  cd ~/
+  cd /opt/python-envs
   mkdir project
   cd project
-  /opt/python/python2.6/bin/virtualenv .
+  /opt/python/python-2.6/bin/virtualenv --distribute --no-site-packages .
   source bin/activate
 
 At this step verify that your Python interpreter is a python 2.6
@@ -33,13 +33,5 @@ Now you can install our architecture dependencies for Plone 4
   easy_install psycopg2
   easy_install lxml==2.2.8
   easy_install celementtree
-  easy_install ZopeSkel
   easy_install zopeskel.unis
-
-
-You should create an user in your postgres database
-
-::
-
-  sudo -u postgres createuser -e -d -i -l -P -R -S  plone
 
