@@ -3,7 +3,9 @@ UNIS Skels Usage
 ===================
 
 Skels allows you to quickly configure a new project following its need.
-
+For the next steps you only need a normal account user. The only steps you
+need to to as superuser are reconfiguring and restarting the proxy (apache or
+nginx) that runs on the port 80.
 
 
 Project preparation
@@ -35,3 +37,43 @@ Now you can install our architecture dependencies for Plone 4
   easy_install celementtree
   easy_install zopeskel.unis
 
+
+You can check if the new buildout template is well installed by typing the
+following command:
+
+::
+
+  paster create --list-templates
+
+  Available templates:
+  ...
+  unis_plone4_buildout:  A buildout for Plone 4.x
+
+
+Your new Plone easy installer is ready. You can create a new Plone 4 project.
+
+::
+
+  paster create -t unis_plone4_buildout
+
+
+What can you configure in the easy mode:
+
+- buildout directory name ('builout' or deployement)
+
+- the main domain name use for the proxy
+
+- the id of the Plone site ('site' or 'Plone')
+
+- the Plone version (above 4)
+
+- shared blobs files between zope instances (you should say yes if all instances
+  are on the same server)
+
+- the ports starting value for all services (we reserve at least 15 ports)
+
+- install LDAP aware products (python-ldap, PloneLDAP)
+
+- install CAS aware products (CAS4PAS, collective.castle)
+
+- install Metnav products (metnav, enslyon.existda)
