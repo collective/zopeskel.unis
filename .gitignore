@@ -5,4 +5,7 @@ eggs
 parts
 *.egg-info
 .*
+*.mo
+*.pyc
+*.pyo
 !.gitignore
