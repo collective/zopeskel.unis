@@ -1,14 +1,52 @@
 Changelog
 =========
 
- 1.1   2010-11-10
------------------
+1.6   2010-01-10
+----------------
+
+- Fix license in setup.py
+  [encolpe]
+
+- Add paster template usage in documentation
+  [encolpe]
+
+- Add correct classifiers for pypi
+  [encolpe]
+
+1.5   2010-01-07
+----------------
+
+- Fix documentation errors
+  [encolpe]
+
+1.4   2010-12-23
+----------------
+
+- bugfix release
+  [encolpe]
+
+1.3   2010-12-23
+----------------
+
+- complete the easy mode
+  [encolpe]
+
+1.2   2010-12-22
+----------------
+
+- Complete installation documentation for Debian Lenny
+  [encolpe]
+
+
+1.1   2010-11-10
+----------------
 
 - Add usage documentation in the package description
   [encolpe]
 
- 1.0   2010-11-10
------------------
+
+1.0   2010-11-10
+----------------
 
 - Initial release
   [encolpe]
