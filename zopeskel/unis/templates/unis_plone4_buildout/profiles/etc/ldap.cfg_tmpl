@@ -1,0 +1,12 @@
+[project-settings]
+eggs +=
+    python-ldap
+    Products.PloneLDAP
+
+#zcml +=
+
+[versions]
+python-ldap = 2.3.12
+Products.LDAPMultiPlugins = 1.13
+Products.LDAPUserFolder = 2.19
+Products.PloneLDAP = 1.1

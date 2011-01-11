@@ -1,0 +1,11 @@
+[project-settings]
+eggs +=
+    Products.CAS4PAS
+    collective.castle
+
+zcml +=
+    collective.castle
+
+[versions]
+collective.castle = 1.2
+Products.CAS4PAS = 2.1

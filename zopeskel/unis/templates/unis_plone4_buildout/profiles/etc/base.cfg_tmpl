@@ -13,6 +13,15 @@ extends =
     project.cfg
     versions.cfg
     sources.cfg
+#if $instance_type == 'relstorage'
+    relstorage.cfg
+#end if
+#if $app_ldap
+    ldap.cfg
+#end if
+#if $app_cas
+    cas.cfg
+#end if
 #if $app_metnav
     metnav.cfg
 #end if
@@ -35,4 +44,4 @@ versions = versions
 [PIL]
 recipe = zerokspot.recipe.distutils
 urls =
-    http://dist.repoze.org/PIL-1.1.6.tar.gz
+    \${downloads:pil}

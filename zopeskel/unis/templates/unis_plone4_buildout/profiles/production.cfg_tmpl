@@ -53,6 +53,8 @@ bind = \${ports:main}
 #==============================================================================
 # Zope - Zeo server and instances configuration
 #==============================================================================
+
+#if $instance_type == 'filestorage'
 [zeoserver]
 # For more information on this step and configuration options see:
 # http://pypi.python.org/pypi/plone.recipe.zeoserver
@@ -61,16 +63,23 @@ zeo-address = \${hosts:zeo-server}:\${ports:zeo-server}
 effective-user = \${users:zope}
 blob-storage = \${buildout:directory}/var/blobstorage
 pack-days = 7
+#end if
 
 [instance1]
 <=instance-settings
 recipe = plone.recipe.zope2instance
 http-address = \${hosts:instance1}:\${ports:instance1}
+#if $instance_type == 'relstorage'
+db_base = ${project}-production
+#end if
 
 [instance2]
 <=instance-settings
 recipe = plone.recipe.zope2instance
 http-address = \${hosts:instance2}:\${ports:instance2}
+#if $instance_type == 'relstorage'
+db_base = ${project}-production
+#end if
 
 ##############################################################################
 # Supervisor : add plugin superlance
@@ -79,6 +88,7 @@ http-address = \${hosts:instance2}:\${ports:instance2}
 [supervisor]
 plugins = superlance
 eventlisteners =
+          BalancerHttpOk  TICK_60 \${buildout:bin-directory}/httpok [-p balancer  -t 20 http://\${hosts:balancer}:\${ports:balancer}/]
           Instance1HttpOk TICK_60 \${buildout:bin-directory}/httpok [-p instance1 -t 20 http://\${hosts:instance1}:\${ports:instance1}/]
           Instance2HttpOk TICK_60 \${buildout:bin-directory}/httpok [-p instance2 -t 600 http://\${hosts:instance2}:\${ports:instance2}/]
 

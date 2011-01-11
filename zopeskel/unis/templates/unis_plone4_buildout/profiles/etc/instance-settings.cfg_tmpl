@@ -1,7 +1,10 @@
 #==============================================================================
 # Zope instance base settings
 #==============================================================================
-# This settings should be used for production and overwritten for preproduction
++-
+
+
+This settings should be used for production and overwritten for preproduction
 
 [instance-settings]
 # For more information on this step and configuration options see:
@@ -11,13 +14,30 @@ zcml = \${project-settings:zcml}
 user = admin:admin
 zserver-threads = 2
 zodb-cache-size = 20000
-zeo-client-cache-size = 300MB
-debug-mode = off
-verbose-security = off
+#if $instance_type == 'filestorage'
 zeo-client = on
 zeo-address = \${zeoserver:zeo-address}
+zeo-client-cache-size = 300MB
+#end if
+debug-mode = off
+verbose-security = off
 effective-user = \${users:zope}
 http-address = \$\${:http-address}
 # Set shared-blob to off when ZEO clients are on different physical servers
 shared-blob = on
 blob-storage = \${buildout:directory}/var/blobstorage
+
+#if $instance_type == 'relstorage'
+rel-storage =
+    type $project\$\${db_base}
+    dbname $db_name
+    host $db_host:$db_port
+    user $db_username
+    password $db_password
+    blob-dir \${buildout:directory}/var/blobstorage
+#end if
+
+environment-vars =
+    PTS_LANGUAGES en fr
+    zope_i18n_allowed_languages en fr
+    zope_i18n_compile_mo_files true

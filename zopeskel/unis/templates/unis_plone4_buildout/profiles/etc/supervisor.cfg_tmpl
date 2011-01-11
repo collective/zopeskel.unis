@@ -21,7 +21,7 @@ output = \${buildout:directory}/bin/ctl.sh
 #==============================================================================
 # One supervisor to rulez them all
 #==============================================================================
-# Supervisor is a client/server system that allows its users to monitor and 
+# Supervisor is a client/server system that allows its users to monitor and
 # control a number of processes on UNIX-like operating systems.
 [supervisor]
 # For more information on this step and configuration options see:
@@ -36,7 +36,11 @@ programs =
     20 instance1 (autostart=true startsecs=10) \${buildout:bin-directory}/instance1 [console]             true \${users:zope}
     20 instance2 (autostart=true startsecs=10) \${buildout:bin-directory}/instance2 [console]             true \${users:zope}
     30 cache     (autostart=true)              \${buildout:directory}/bin/cache                           true \${users:cache}
-    40 balancer  (autostart=true)              \${buildout:directory}/bin/poundrun \${buildout:directory} true \${users:balancer}
+#if $balancer_utility == 'pound'
+    40 pound     (autostart=true)              \${buildout:directory}/bin/poundrun \${buildout:directory} true \${users:balancer}
+#elif $balancer_utility == 'haproxy'
+    40 haproxy   (autostart=true)              \${buildout:directory}/bin/haproxy [ -f \${buildout:directory}/etc/haproxy.conf -db ] true \${users:balancer}
+#end if
 
 #==============================================================================
 # System command to give executable permissions on script

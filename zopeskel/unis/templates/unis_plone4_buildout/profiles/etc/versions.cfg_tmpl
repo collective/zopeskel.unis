@@ -4,7 +4,9 @@
 
 # Download urls - encapsulate Zope, Varnish and pound versions
 [downloads]
-pound = http://www.apsis.ch/pound/Pound-2.5.tgz
+pil = http://dist.plone.org/thirdparty/PILwoTk-1.1.6.4.tar.gz
+pound = http://dist.plone.org/thirdparty/Pound-2.4.5.tgz
+haproxy = http://dist.plone.org/thirdparty/haproxy-1.4.8.zip
 varnish = http://downloads.sourceforge.net/varnish/varnish-2.1.3.tar.gz
 squid = http://www.squid-cache.org/Versions/v3/3.1/squid-3.1.7.tar.gz
 

@@ -20,7 +20,6 @@ extends = etc/base.cfg etc/http.cfg
 newest = false
 develop = \${project-settings:develop}
 parts += instance
-         omelette
 
 # Downloads storage folder
 download-cache = downloads
@@ -33,11 +32,16 @@ eggs += plone.reload
         Products.Gloworm
         Products.PDBDebugMode
         Products.DocFinderTab
+        Products.PrintingMailHost
         Products.DCWorkflowGraph
         collective.workflowed
+        ipdb
+        iw.debug
+
 
 zcml += plone.reload
         Products.Gloworm
+        iw.debug
 
 #==============================================================================
 # Configure developpement ports and ips
@@ -97,7 +101,3 @@ recipe = zc.recipe.egg
 eggs = \${instance:eggs}
 interpreter = zopepy
 scripts = zopepy
-
-[omelette]
-recipe = collective.recipe.omelette
-eggs = \${instance:eggs}

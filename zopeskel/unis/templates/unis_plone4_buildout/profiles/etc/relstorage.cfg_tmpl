@@ -1,0 +1,15 @@
+[project-settings]
+eggs +=
+#if $db_type == 'postgresql'
+    psycopg2
+#elif $db_type == 'oracle'
+    cx_Oracle
+#elif $db_type == 'mysql'
+    Mysql-python
+#end if
+    RelStorage
+
+[versions]
+psycopg2 = 2.3.2
+cx_Oracle = 5.0.4
+MySQL-python = 1.2.3

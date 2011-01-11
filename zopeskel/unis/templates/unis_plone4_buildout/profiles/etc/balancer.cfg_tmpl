@@ -2,29 +2,38 @@
 # Load balancing server configuration file
 #==============================================================================
 # Build and configure a load balancing server.
-# - Build pound
-# - Configure pound
+# - Build $balancer_utility
+# - Configure $balancer_utility
 
 [buildout]
 parts = balancer-build
         balancer
 
 #==============================================================================
-# Build pound
+# Build $balancer_utility
 #==============================================================================
 
 [balancer-build]
+#if $balancer_utility == 'pound'
 # may require libssl-dev
 recipe = plone.recipe.pound:build
 url = \${downloads:pound}
 owner = \${users:balancer}
 group = \${users:balancer}
+#elif $balancer_utility == 'haproxy'
+recipe = plone.recipe.haproxy
+url = \${downloads:haproxy}
+target = linux26
+cpu = i686
+pcre = 1
+#end if
 
 #==============================================================================
-# Configure pound
+# Configure $balancer_utility
 #==============================================================================
 
 [balancer]
+#if $balancer_utility == 'pound'
 recipe = plone.recipe.pound:config
 ## Run as a daemon to let supervisord manage
 daemon = 0
@@ -33,4 +42,14 @@ log_level = 3
 owner = \${users:balancer}
 group = \${users:balancer}
 balancers =
-  \${hosts:main} \${hosts:balancer}:\${ports:balancer} \${hosts:instance1}:\${ports:instance1},1,30 \${hosts:instance2}:\${ports:instance2},1,60
+  \${hosts:main} \c \${hosts:instance1}:\${ports:instance1},1,30 \${hosts:instance2}:\${ports:instance2},1,60
+#elif $balancer_utility == 'haproxy'
+recipe = collective.recipe.template
+input = \${buildout:directory}/templates/haproxy.conf.in
+output = \${buildout:directory}/etc/haproxy.conf
+maxconn = 24000
+ulimit-n = 65536
+user = \${users:balancer}
+group = \${users:balancer}
+bind = ${hosts:balancer}:\${ports:balancer}
+#end if
