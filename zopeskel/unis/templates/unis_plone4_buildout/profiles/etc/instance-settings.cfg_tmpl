@@ -1,10 +1,9 @@
 #==============================================================================
 # Zope instance base settings
 #==============================================================================
-+-
 
 
-This settings should be used for production and overwritten for preproduction
+#This settings should be used for production and overwritten for preproduction
 
 [instance-settings]
 # For more information on this step and configuration options see:
