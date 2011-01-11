@@ -32,7 +32,9 @@ user = \${supervisor-settings:user}
 password = \${supervisor-settings:password}
 serverurl = http://\${hosts:supervisor}:\${ports:supervisor}
 programs =
+#if $instance_type == 'filestorage'
     10 zeo       (autostart=true)              \${zeoserver:location}/bin/runzeo                          true \${users:zope}
+#end if
     20 instance1 (autostart=true startsecs=10) \${buildout:bin-directory}/instance1 [console]             true \${users:zope}
     20 instance2 (autostart=true startsecs=10) \${buildout:bin-directory}/instance2 [console]             true \${users:zope}
     30 cache     (autostart=true)              \${buildout:directory}/bin/cache                           true \${users:cache}

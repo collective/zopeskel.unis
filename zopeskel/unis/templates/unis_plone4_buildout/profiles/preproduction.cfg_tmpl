@@ -21,9 +21,12 @@
 extends = ./etc/base.cfg ./etc/instance-settings.cfg ./etc/cache.cfg ./etc/balancer.cfg ./etc/supervisor.cfg ./etc/http.cfg
 newest = false
 
-parts += zeoserver
-         instance1
-         instance2
+parts +=
+#if $instance_type == 'filestorage'
+    zeoserver
+#end if
+    instance1
+    instance2
 
 #==============================================================================
 # Packages
@@ -55,6 +58,7 @@ mainconfig = /etc/apache2/apache2.conf
 #==============================================================================
 # Zope - Zeo server and instances configuration
 #==============================================================================
+#if $instance_type == 'filestorage'
 [zeoserver]
 # For more information on this step and configuration options see:
 # http://pypi.python.org/pypi/plone.recipe.zeoserver
@@ -63,6 +67,7 @@ zeo-address = \${hosts:zeo-server}:\${ports:zeo-server}
 effective-user = \${users:zope}
 blob-storage = \${buildout:directory}/var/blobstorage
 pack-days = 7
+#end if
 
 [instance-settings]
 zserver-threads = 1
@@ -73,11 +78,17 @@ zeo-client-cache-size = 100MB
 <=instance-settings
 recipe = plone.recipe.zope2instance
 http-address = \${hosts:instance1}:\${ports:instance1}
+#if $instance_type == 'relstorage'
+db-base = \${project}-preproduction
+#end if
 
 [instance2]
 <=instance-settings
 recipe = plone.recipe.zope2instance
 http-address = \${hosts:instance2}:\${ports:instance2}
+#if $instance_type == 'relstorage'
+db-base = \${project}-preproduction
+#end if
 
 #==============================================================================
 # Configure Varnish for Plone

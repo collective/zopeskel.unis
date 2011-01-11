@@ -20,9 +20,12 @@ extends = ./etc/base.cfg ./etc/instance-settings.cfg ./etc/cache.cfg ./etc/balan
 
 newest = false
 
-parts += zeoserver
-         instance1
-         instance2
+parts +=
+#if $instance_type == 'filestorage'
+    zeoserver
+#end if
+    instance1
+    instance2
 
 #==============================================================================
 # Packages
