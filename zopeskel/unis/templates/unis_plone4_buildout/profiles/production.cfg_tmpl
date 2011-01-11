@@ -70,7 +70,7 @@ pack-days = 7
 recipe = plone.recipe.zope2instance
 http-address = \${hosts:instance1}:\${ports:instance1}
 #if $instance_type == 'relstorage'
-db_base = ${project}-production
+db-base = \${project}-production
 #end if
 
 [instance2]
@@ -78,7 +78,7 @@ db_base = ${project}-production
 recipe = plone.recipe.zope2instance
 http-address = \${hosts:instance2}:\${ports:instance2}
 #if $instance_type == 'relstorage'
-db_base = ${project}-production
+db-base = \${project}-production
 #end if
 
 ##############################################################################

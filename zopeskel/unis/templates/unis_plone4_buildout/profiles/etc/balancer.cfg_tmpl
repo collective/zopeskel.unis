@@ -51,5 +51,5 @@ maxconn = 24000
 ulimit-n = 65536
 user = \${users:balancer}
 group = \${users:balancer}
-bind = ${hosts:balancer}:\${ports:balancer}
+bind = \${hosts:balancer}:\${ports:balancer}
 #end if

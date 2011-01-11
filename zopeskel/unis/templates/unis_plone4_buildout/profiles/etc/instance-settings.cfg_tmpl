@@ -29,8 +29,8 @@ blob-storage = \${buildout:directory}/var/blobstorage
 
 #if $instance_type == 'relstorage'
 rel-storage =
-    type $project\$\${db_base}
-    dbname $db_name
+    type $db_type
+    dbname \$\${:db-base}
     host $db_host:$db_port
     user $db_username
     password $db_password
