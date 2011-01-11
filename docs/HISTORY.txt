@@ -4,6 +4,9 @@ Changelog
 1.6   2010-01-10
 ----------------
 
+- Add ldap, cas and relstorage options
+  [encolpe]
+
 - Fix license in setup.py
   [encolpe]
 
