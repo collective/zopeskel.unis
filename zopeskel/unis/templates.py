@@ -68,11 +68,11 @@ Database supposed to work: PostgreSQL, Oracle, MySQL.
 """
     )
 
-VAR_INSTANCE_ENUM = BoundedIntVar(
+VAR_INSTANCE_ENUM = BoundedIntVar( #XXX
     'instance_enum',
     title='Number of instances',
     description='Number of instances managed in the cluster',
-    default='1',
+    default='2',
     modes=(EXPERT,),
     page='Main',
     help="""
@@ -96,7 +96,7 @@ for all clients.
 """
 )
 
-VAR_MEMCACHE = BooleanVar(
+VAR_MEMCACHE = BooleanVar( #XXX
     'enable_memcache',
     title='Enable memcache',
     description="Enable the memcache machinery for let zeo clients shared memory",
@@ -130,7 +130,7 @@ This options lets you select the ports starting value that the configuration wil
 #   Allows to choose a cache utility
 #--------------------------------------
 
-VAR_CACHE_UTILITY = StringChoiceVar(
+VAR_CACHE_UTILITY = StringChoiceVar( #XXX
     'cache_utility',
     title='Cache utility',
     description='Which cache utility would you like? (Squid/Varnish)?',
@@ -164,7 +164,7 @@ It will also generate a default configuration for the utility.
 #   Allows to choose a proxy utility
 #--------------------------------------
 
-VAR_PROXY_UTILITY = StringChoiceVar(
+VAR_PROXY_UTILITY = StringChoiceVar( #XXX
     'proxy_utility',
     title='Proxy Utility',
     description='Which proxy utility would you like? (Apache/NGinx)?',
@@ -177,7 +177,7 @@ This option lets you select your proxy utility.
 It will also generate a default configuration for the utility.
 """)
 
-VAR_MUNIN = BooleanVar(
+VAR_MUNIN = BooleanVar( #XXX
     'munin',
     title='Munin activation',
     description='Do you want munin stats for you instance',
@@ -261,7 +261,7 @@ It supposes that the current server has a python-ldap installed.
 )
 
 VAR_APP_CAS = BooleanVar(
-    'app_cass',
+    'app_cas',
     title='Install CAS features',
     description='Do you want to connect a CAS SSO?',
     default='false',
