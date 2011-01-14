@@ -35,12 +35,14 @@ eggs += plone.reload
         Products.PrintingMailHost
         Products.DCWorkflowGraph
         collective.workflowed
+        collective.portlet.debuginfo
         ipdb
         iw.debug
 
 
 zcml += plone.reload
         Products.Gloworm
+        collective.portlet.debuginfo
         iw.debug
 
 #==============================================================================
