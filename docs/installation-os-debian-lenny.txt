@@ -113,6 +113,8 @@ needed everywhere: python-imaging, python-ldap and python libxml2 binding.
 
 * libpng12-dev
 
+* libfreetype6-dev
+
 * libxml2-dev
 
 * libxslt1-dev
