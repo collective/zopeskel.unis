@@ -39,6 +39,9 @@ user = \${users:cache}
 mode = foreground
 zope2_vhm_map =
     \${hosts:main}:/\${plone-sites:main}
+connect-timeout = 0.5
+first-byte-timeout = 3000
+between-bytes-timeout = 0
 
 #end if
 #if $cache_utility == 'squid'
