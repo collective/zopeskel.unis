@@ -282,6 +282,17 @@ This option install all needed metnav products for Plone.
 """
 )
 
+VAR_APP_GETPAID = BooleanVar(
+    'app_getpaid',
+    title='Install GetPaid products',
+    description='Do you want to use GetPaid features?',
+    default='false',
+    modes=(EASY, EXPERT),
+    help="""
+This option install all needed to transform your Plone site in an e-commerce things.
+"""
+)
+
 class UnisPlone4Buildout(AbstractBuildout):
     _template_dir = 'templates/unis_plone4_buildout'
     summary = "A buildout for Plone 4.x"
@@ -349,6 +360,7 @@ See README.txt for details.
         VAR_APP_LDAP,
         VAR_APP_CAS,
         VAR_APP_METNAV,
+        VAR_APP_GETPAID,
     ])
 
     def run(self, command, output_dir, vars):

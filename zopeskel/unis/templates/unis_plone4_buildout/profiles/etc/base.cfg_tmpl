@@ -17,13 +17,16 @@ extends =
     relstorage.cfg
 #end if
 #if $app_ldap
-    ldap.cfg
+    ../modules/ldap.cfg
 #end if
 #if $app_cas
-    cas.cfg
+    ../modules/cas.cfg
 #end if
 #if $app_metnav
-    metnav.cfg
+    ../modules/metnav.cfg
+#end if
+#if $app_getpaid
+    ../modules/getpaid.cfg
 #end if
 
 parts =
