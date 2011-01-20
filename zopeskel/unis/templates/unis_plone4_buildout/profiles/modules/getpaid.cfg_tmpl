@@ -26,6 +26,7 @@ eggs +=
     zc.ssl
     zc.table
     zope.browserresource
+    Products.AdvancedQuery
     Products.PloneGetPaid
 #    getpaid.authorizedotnet
 #    getpaid.clickandbuy
