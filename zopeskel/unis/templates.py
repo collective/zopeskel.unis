@@ -44,7 +44,7 @@ VAR_PLONEVER = StringVar(
     'plone_version',
     title='Plone Version',
     description='Plone version # to install',
-    default='4.0.2',
+    default='4.0.3',
     modes=(EASY, EXPERT),
     page='Main',
     help="""
