@@ -1,8 +1,12 @@
 Changelog
 =========
 
-1.6   2010-01-10
+1.6   2010-01-27
 ----------------
+
+- Add zopepy, i18ndude, test and zopeskel parts from the new plone4_buildout
+  template in ZopeSkel 1.19.
+  [encolpe]
 
 - Add ldap, cas and relstorage options
   [encolpe]
