@@ -19,7 +19,13 @@
 extends = etc/base.cfg etc/http.cfg
 newest = false
 develop = \${project-settings:develop}
-parts += instance
+parts +=
+    instance
+    zopepy
+    i18ndude
+    test
+    zopeskel
+#    omelette
 
 # Downloads storage folder
 download-cache = downloads
@@ -103,3 +109,39 @@ recipe = zc.recipe.egg
 eggs = \${instance:eggs}
 interpreter = zopepy
 scripts = zopepy
+
+# zopepy commands allows you to execute Python scripts using a PYTHONPATH
+# including all the configured eggs
+[zopepy]
+recipe = zc.recipe.egg
+eggs = \${instance:eggs}
+interpreter = zopepy
+scripts = zopepy
+
+# create bin/i18ndude command
+[i18ndude]
+unzip = true
+recipe = zc.recipe.egg
+eggs = i18ndude
+
+# create bin/test command
+[test]
+recipe = zc.recipe.testrunner
+defaults = ['--auto-color', '--auto-progress']
+eggs = \${instance:eggs}
+
+# create ZopeSkel command
+[zopeskel]
+unzip = true
+recipe = zc.recipe.egg
+eggs =
+    ZopeSkel
+    \${instance:eggs}
+
+# symlinks all Python source code to parts/omelette folder when buildout is run
+# windows users will need to install additional software for this part to build
+# correctly.  See http://pypi.python.org/pypi/collective.recipe.omelette for
+# relevant details.
+# [omelette]
+# recipe = collective.recipe.omelette
+# eggs = \${instance:eggs}
