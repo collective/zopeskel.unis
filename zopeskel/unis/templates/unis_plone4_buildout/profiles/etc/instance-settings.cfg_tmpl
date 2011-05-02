@@ -31,7 +31,7 @@ rel-storage =
     type $db_type
 #if $db_type == 'postgresql'
     dsn dbname='\$\${:db-base}' user='$db_username' host='$db_host' port='$db_port' password='$db_password'
-#if $db_type == 'oracle'
+#elif $db_type == 'oracle'
     dsn dbname='\$\${:db-base}' user='$db_username' host='$db_host' port='$db_port' password='$db_password'
 #elif $db_type == 'mysql'
     dbname \$\${:db-base}
