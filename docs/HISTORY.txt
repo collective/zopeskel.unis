@@ -1,6 +1,24 @@
 Changelog
 =========
 
+1.8   2011-05-02
+----------------
+
+- Add a test file for the Hudson server
+  [encolpe]
+
+- Fix the typo in DSN condition
+  [encolpe]
+
+1.7   2011-04-20
+----------------
+
+- Update Plone default version to 4.0.5
+  [encolpe]
+
+- Fix postgres and oracle DSN
+  [encolpe]
+
 1.6   2010-01-27
 ----------------
 
