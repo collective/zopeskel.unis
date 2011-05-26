@@ -30,12 +30,14 @@ parts +=
 #==============================================================================
 # Packages
 #==============================================================================
+
 [versions]
 
 
 #==============================================================================
 # Defines
 #==============================================================================
+
 [ports]
 main = 80
 cache = ${cache_prod}
@@ -45,13 +47,14 @@ instance1 = ${zeoclient_prod_1}
 instance2 = ${zeoclient_prod_2}
 supervisor = ${supervisor_prod}
 
+
 #==============================================================================
 # Apache - virtualhost configuration
 #==============================================================================
 
 [apache]
-mainconfig = /etc/apache2/apache2.conf
 bind = \${ports:main}
+
 
 #==============================================================================
 # Zope - Zeo server and instances configuration
@@ -84,10 +87,12 @@ http-address = \${hosts:instance2}:\${ports:instance2}
 db-base = \${project}-production
 #end if
 
-##############################################################################
+
+##############################################################################  
 # Supervisor : add plugin superlance
 ##############################################################################
 #httpok [-p processname] [-a] [-g] [-t timeout] [-c status_code] [-b inbody] [-m mail_address] [-s sendmail] URL
+
 [supervisor]
 plugins = superlance
 eventlisteners =

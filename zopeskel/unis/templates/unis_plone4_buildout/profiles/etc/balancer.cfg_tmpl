@@ -22,6 +22,8 @@ owner = \${users:balancer}
 group = \${users:balancer}
 #elif $balancer_utility == 'haproxy'
 recipe = plone.recipe.haproxy
+# see README for options 
+# http://svn.plone.org/svn/collective/buildout/plone.recipe.haproxy/trunk/README.txt
 url = \${downloads:haproxy}
 target = linux26
 cpu = i686
@@ -41,8 +43,12 @@ timeout = 300
 log_level = 3
 owner = \${users:balancer}
 group = \${users:balancer}
+alive = 60
+sessiontimeout = 1200000
+sessioncookie = _ZopeId
+sticky = on
 balancers =
-  \${hosts:main} \c \${hosts:instance1}:\${ports:instance1},1,30 \${hosts:instance2}:\${ports:instance2},1,60
+  \${hosts:main} \${hosts:balancer}:\${ports:balancer} \${hosts:instance1}:\${ports:instance1},1,30 \${hosts:instance2}:\${ports:instance2},1,60
 #elif $balancer_utility == 'haproxy'
 recipe = collective.recipe.template
 input = \${buildout:directory}/templates/haproxy.conf.in

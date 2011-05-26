@@ -30,9 +30,11 @@ parts +=
 # Downloads storage folder
 download-cache = downloads
 
+
 #==============================================================================
 # Use some usefull developpement packages and under dev packages
 #==============================================================================
+
 [project-settings]
 eggs += plone.reload
         Products.Gloworm
@@ -44,12 +46,13 @@ eggs += plone.reload
         collective.portlet.debuginfo
         ipdb
         iw.debug
-
+#        collective.profiler
 
 zcml += plone.reload
         Products.Gloworm
         collective.portlet.debuginfo
         iw.debug
+
 
 #==============================================================================
 # Configure developpement ports and ips
@@ -62,18 +65,19 @@ cache = 80
 [hosts]
 main = ${project}-dev.${domain_name}
 
+
 #==============================================================================
 # Apache - virtualhost configuration
 #==============================================================================
 
 [apache]
-mainconfig = /etc/apache2/apache2.conf
 backends = \${hosts:main}:\${hosts:instance}:\${ports:instance}
 
 
 #==============================================================================
 # Zope - instance configuration
 #==============================================================================
+
 [instance]
 # For more information on this step and configuration options see:
 # http://pypi.python.org/pypi/plone.recipe.zope2instance
@@ -105,14 +109,6 @@ zcml = \${project-settings:zcml}
 [zopepy]
 # For more information on this step and configuration options see:
 # http://pypi.python.org/pypi/zc.recipe.egg
-recipe = zc.recipe.egg
-eggs = \${instance:eggs}
-interpreter = zopepy
-scripts = zopepy
-
-# zopepy commands allows you to execute Python scripts using a PYTHONPATH
-# including all the configured eggs
-[zopepy]
 recipe = zc.recipe.egg
 eggs = \${instance:eggs}
 interpreter = zopepy

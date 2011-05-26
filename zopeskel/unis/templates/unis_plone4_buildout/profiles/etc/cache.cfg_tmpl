@@ -1,8 +1,8 @@
 #==============================================================================
 # Cache server configuration file
 #==============================================================================
-# - Build cache
-# - Configure cache
+# - Build $cache_utility
+# - Configure $cache_utility
 
 #if $cache_utility == 'varnish'
 
@@ -56,18 +56,16 @@ parts =
     cache-build
     cache-conf
 
-[versions]
-iw.recipe.squid = 1.0
-
 [cache-build]
-recipe = zc.recipe.cmmi
+recipe = plone.recipe.squid:build
 url = \${downloads:squid}
 
 [cache-conf]
-recipe = iw.recipe.squid
+recipe = plone.recipe.squid:instance
 bind = \${hosts:cache}:\${ports:cache}
-backends = \${hosts:balancer}:\${ports:balancer}
+backends = /VirtualHostBase/http/\${hosts:main}:\${ports:main}/\${plone-sites:main}:\${hosts:balancer}:\${ports:balancer}
 cache-size = 1000
 user = \${users:cache}
+group = \${users:cache}
 
 #end if

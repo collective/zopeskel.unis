@@ -4,7 +4,7 @@
 # Base buildout configuration for ${project}
 
 [buildout]
-extensions = buildout.dumppickedversions mr.developer lovely.buildouthttp
+extensions = buildout.dumppickedversions mr.developer lovely.buildouthttp buildout.threatlevel
 
 # Change the number here to change the version of Plone being used
 extends =

@@ -29,7 +29,7 @@ VAR_ZOPE_PASSWD = StringVar(
     page='Main',
     default='admin',
     help="""
-Your buildout will have a single user, "%(zope_user)s", with manager 
+Your buildout will have a single user, "%(zope_user)s", with manager
 privileges, defined at the root. This option lets you select the initial
 password for this user. If left blank, the password will be randomly
 generated.
@@ -59,5 +59,3 @@ class AbstractBuildout(BaseTemplate):
     category = "Buildout"
 
     vars = copy.deepcopy(BaseTemplate.vars)
-        
-

@@ -15,6 +15,7 @@ parts += apache
 # Vhost generation
 [apache]
 recipe = plone.recipe.apache:config
+mainconfig = /etc/apache2/apache2.conf
 bind = \${ports:main}
 backends = \${hosts:main}:\${hosts:cache}:\${ports:cache}
 zope2_vhm_map = \${hosts:main}:/\${plone-sites:main}

@@ -4,20 +4,24 @@
 
 # Download urls - encapsulate Zope, Varnish and pound versions
 [downloads]
-pil = http://dist.plone.org/thirdparty/PILwoTk-1.1.6.4.tar.gz
-pound = http://dist.plone.org/thirdparty/Pound-2.4.5.tgz
+pil = http://dist.plone.org/thirdparty/PIL-1.1.7.tar.gz
+pound = http://www.apsis.ch/pound/Pound-2.5.tgz
+varnish = http://repo.varnish-cache.org/source/varnish-2.1.5.tar.gz
+squid = http://www.squid-cache.org/Versions/v3/3.1/squid-3.1.12.tar.gz
 haproxy = http://dist.plone.org/thirdparty/haproxy-1.4.8.zip
-varnish = http://downloads.sourceforge.net/varnish/varnish-2.1.3.tar.gz
-squid = http://www.squid-cache.org/Versions/v3/3.1/squid-3.1.7.tar.gz
 
 # Versions - Define eggs version
 [versions]
 zc.buildout = 1.5.2
+distribute = 0.6.16
+docutils = 0.7
 zc.recipe.cmmi = 1.3.2
+
 plone.recipe.varnish = 1.1
 plone.recipe.apache = 0.3.2
+supervisor = 3.0a10
+
+zope.interface = 3.6.2
 zope.schema = 3.6.0
-zope.interface = 3.6.1
 zope.exceptions = 3.6.1
-docutils = 0.7
-supervisor = 3.0a9
+zope.testing = 3.10.2
