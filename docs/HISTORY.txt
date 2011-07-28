@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.9   2011-07-28
+----------------
+
+- Fix HAProxy configuration
+  [encolpe]
+
 1.8   2011-05-02
 ----------------
 
