@@ -16,21 +16,25 @@ extends =
 #if $instance_type == 'relstorage'
     relstorage.cfg
 #end if
-#if $app_ldap
+#if $app_ldap  == 'true'
     ../modules/ldap.cfg
 #end if
-#if $app_cas
+#if $app_cas == 'true'
     ../modules/cas.cfg
 #end if
 #if $app_metnav
     ../modules/metnav.cfg
 #end if
-#if $app_getpaid
+#if $app_getpaid == 'true'
     ../modules/getpaid.cfg
+#end if
+#if $app_theming == 'true'
+    ../modules/theming.cfg
 #end if
 
 parts =
     PIL
+    plonesite
 
 # Add additional egg download sources here. dist.plone.org contains archives
 # of Plone packages.
@@ -43,6 +47,14 @@ find-links =
     http://effbot.org/downloads
 
 versions = versions
+
+[plonesite]
+recipe = collective.recipe.plonesite
+site-id = \${plone-sites:main}
+instance = instance
+#zeoserver = zeoserver
+#profiles-initial = quadra.policy:initial
+#profiles = quadra.policy:default
 
 [PIL]
 recipe = zerokspot.recipe.distutils

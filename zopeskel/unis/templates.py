@@ -8,7 +8,7 @@ from zopeskel.base import var, EASY, EXPERT
 from zopeskel.vars import StringVar, BooleanVar, IntVar, OnOffVar, BoundedIntVar, StringChoiceVar
 
 #--------------------------------------
-#   Allows to choose the Zope version
+#   Allows to choose the Domain name
 #--------------------------------------
 
 VAR_DOMAIN = StringVar(
@@ -23,6 +23,10 @@ This is the domain name used to access from external resources to your Plone thr
 eg: type preproduction.project.plone.yourdomain.com for http://preproduction.project.plone.yourdomain.com
 """
     )
+
+#--------------------------------------
+#   Allows to choose the Plone site id
+#--------------------------------------
 
 VAR_PLONESITE_PATH = StringVar(
     'plonesite_path',
@@ -44,7 +48,7 @@ VAR_PLONEVER = StringVar(
     'plone_version',
     title='Plone Version',
     description='Plone version # to install',
-    default='4.0.9',
+    default='4.0-latest',
     modes=(EASY, EXPERT),
     page='Main',
     help="""
@@ -87,7 +91,7 @@ VAR_SHARED_BLOBS = BooleanVar(
     title='Shared Blobs',
     description='Do you want to share files stored in blobstorage?',
     default='true',
-    modes=(EASY, EXPERT),
+    modes=(EXPERT),
     page='Main',
     help="""
 By default files stored in blobs are shared throught the ZEO server connexion.
@@ -117,7 +121,7 @@ VAR_PORTS_STARTING_VALUE = BoundedIntVar(
     title='Ports stating value',
     description='Ports starting value use to generate buildout files',
     default='8080',
-    modes=(EASY, EXPERT,),
+    modes=(EASY, EXPERT),
     page='Main',
     help="""
 This options lets you select the ports starting value that the configuration will use to generate the instance configuration (instance,zeo,varnish,pound/squid,...).
@@ -293,6 +297,17 @@ This option install all needed to transform your Plone site in an e-commerce thi
 """
 )
 
+VAR_APP_THEMING = BooleanVar(
+    'app_theming',
+    title='Install plone.app.theming products with Diazo',
+    description='Do you want to use Diazo features?',
+    default='true',
+    modes=(EASY, EXPERT),
+    help="""
+This option install all needed have Diazo theming in your plone site.
+"""
+)
+
 class UnisPlone4Buildout(AbstractBuildout):
     _template_dir = 'templates/unis_plone4_buildout'
     summary = "A buildout for Plone 4.x"
@@ -361,6 +376,7 @@ See README.txt for details.
         VAR_APP_CAS,
         VAR_APP_METNAV,
         VAR_APP_GETPAID,
+        VAR_APP_THEMING,
     ])
 
     def run(self, command, output_dir, vars):
@@ -377,8 +393,8 @@ See README.txt for details.
         self.write_files(command, output_dir, vars)
         self.post(command, output_dir, vars)
 
-    #def post(self, command, output_dir, vars):
-    #    project_folder = str(vars["project"]).lower()
+    def post(self, command, output_dir, vars):
+        project_folder = str(vars["project"]).lower() + '_deployement'
 
-    #    super(UnisPlone4Buildout, self).post(command, project_folder, vars)
+        super(UnisPlone4Buildout, self).post(command, project_folder, vars)
 

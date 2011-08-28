@@ -16,7 +16,7 @@
 # client (80) => appache => zope server (${dev_instance})
 
 [buildout]
-extends = etc/base.cfg etc/http.cfg
+extends = standalone.cfg etc/http.cfg
 newest = false
 develop = \${project-settings:develop}
 parts +=
@@ -25,10 +25,11 @@ parts +=
     i18ndude
     test
     zopeskel
-#    omelette
+    omelette
 
 # Downloads storage folder
 download-cache = downloads
+ext-cache = ext-cache
 
 
 #==============================================================================
@@ -37,21 +38,32 @@ download-cache = downloads
 
 [project-settings]
 eggs += plone.reload
-        Products.Gloworm
+        ipdb
+        iw.debug
         Products.PDBDebugMode
+        Products.Gloworm
         Products.DocFinderTab
         Products.PrintingMailHost
         Products.DCWorkflowGraph
         collective.workflowed
         collective.portlet.debuginfo
-        ipdb
-        iw.debug
-#        collective.profiler
+        collective.profiler
+        plone.app.testing
 
 zcml += plone.reload
+        iw.debug
         Products.Gloworm
         collective.portlet.debuginfo
-        iw.debug
+
+auto-checkout += collective.portlet.debuginfo
+
+[sources]
+collective.portlet.debuginfo = svn http://svn.plone.org/svn/collective/collective.portlet.debuginfo/trunk/
+
+[versions]
+iw.debug = 0.3
+ipdb = 0.4
+ipython = 0.10.1
 
 
 #==============================================================================
@@ -79,28 +91,10 @@ backends = \${hosts:main}:\${hosts:instance}:\${ports:instance}
 #==============================================================================
 
 [instance]
-# For more information on this step and configuration options see:
-# http://pypi.python.org/pypi/plone.recipe.zope2instance
-recipe = plone.recipe.zope2instance
-user = admin:admin
 zodb-cache-size = 2500
-http-address = \${hosts:instance}:\${ports:instance}
 debug-mode = on
 verbose-security = on
-blob-storage = \${buildout:directory}/var/blobstorage
-effective-user = \${users:zope}
-
-environment-vars = zope_i18n_compile_mo_files = true
-
-# If you want Zope to know about any additional eggs, list them here.
-# This should include any development eggs you listed in develop-eggs above,
-# e.g. eggs = Plone my.package
-eggs = \${project-settings:eggs}
-
-# If you want to register ZCML slugs for any packages, list them here.
-# e.g. zcml = my.package my.other.package
-zcml = \${project-settings:zcml}
-
+environment-vars = zope_i18n_compile_mo_files true
 
 #==============================================================================
 # Debugging tools - preconfigured python interpreter and omelette
@@ -138,6 +132,6 @@ eggs =
 # windows users will need to install additional software for this part to build
 # correctly.  See http://pypi.python.org/pypi/collective.recipe.omelette for
 # relevant details.
-# [omelette]
-# recipe = collective.recipe.omelette
-# eggs = \${instance:eggs}
+[omelette]
+recipe = collective.recipe.omelette
+eggs = \${instance:eggs}

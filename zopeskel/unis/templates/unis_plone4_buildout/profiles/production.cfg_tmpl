@@ -87,6 +87,9 @@ http-address = \${hosts:instance2}:\${ports:instance2}
 db-base = \${project}-production
 #end if
 
+[plonesite]
+instance = instance1
+zeoserver = zeoserver
 
 ##############################################################################  
 # Supervisor : add plugin superlance

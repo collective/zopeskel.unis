@@ -54,7 +54,6 @@ recipe = collective.recipe.template
 input = \${buildout:directory}/templates/haproxy.conf.in
 output = \${buildout:directory}/etc/haproxy.conf
 maxconn = 24000
-ulimit-n = 65536
 user = \${users:balancer}
 group = \${users:balancer}
 bind = \${hosts:balancer}:\${ports:balancer}

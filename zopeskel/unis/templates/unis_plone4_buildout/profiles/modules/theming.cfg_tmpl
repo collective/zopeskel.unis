@@ -1,0 +1,18 @@
+[project-settings]
+eggs += plone.app.theming
+
+[versions]
+# Known good set for plone.app.theming version 1.0b8
+# The latest version can be found at http://good-py.appspot.com/release/plone.app.theming/1.0b8
+WebOb = 1.0.8
+diazo = 1.0rc3
+experimental.cssselect = 0.1
+lxml = 2.3
+plone.app.theming = 1.0b8
+plone.app.themingplugins = 1.0b1
+plone.recipe.zope2instance = 4.1.7
+plone.resource = 1.0b5
+plone.subrequest = 1.6.1
+repoze.xmliter = 0.4
+# extra missing versions
+zope.filerepresentation = 3.6.0

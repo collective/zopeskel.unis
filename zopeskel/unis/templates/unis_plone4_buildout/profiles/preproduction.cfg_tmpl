@@ -94,6 +94,9 @@ http-address = \${hosts:instance2}:\${ports:instance2}
 db-base = \${project}-preproduction
 #end if
 
+[plonesite]
+instance = instance1
+zeoserver = zeoserver
 
 #==============================================================================
 # Configure Varnish for Plone
