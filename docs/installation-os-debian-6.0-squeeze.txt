@@ -87,6 +87,8 @@ needed everywhere: python-imaging, python-ldap and python libxml2 binding.
 
 * build-essential
 
+* libsqlite3-dev
+
 * python-dev
 
 * python-setuptools
@@ -211,7 +213,7 @@ This buildout expect setuptools is installed at least at 0.6.11 version.
 
 ::
 
-  sudo adduser --no-create-home --home /opt --disabled-password plone
+  sudo adduser --home /opt/python-envs --disabled-password plone
   sudo easy_install -U setuptools
   sudo easy_install zc.buildout==1.4.4
   sudo mkdir /opt/python /opt/python-envs

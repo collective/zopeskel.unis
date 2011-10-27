@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.10  2011-10-27
+----------------
+
+- Force to use zopeskel<3.0a1 in setup.py
+  [edegoute]
+
 1.9   2011-07-28
 ----------------
 
