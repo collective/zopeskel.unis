@@ -1,8 +1,5 @@
-bin
-dev
-develop-eggs
-eggs
-parts
+dist
+build
 *.egg-info
 .*
 *.mo
