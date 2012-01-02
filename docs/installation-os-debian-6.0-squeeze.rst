@@ -55,21 +55,28 @@ Debian Backports
 
 Add backports to your sources.list
 
-* Add this line to your *sources.list* (or add a new file
-  to /etc/apt/sources.list.d/)::
+Add a file called **/etc/apt/sources.list.d/squeeze-backports.list** (or add a new file to ):
 
-    deb http://backports.debian.org/debian-backports squeeze-backports main
+.. code-block:: bash
 
-* Create a */etc/apt/preferences* file with these three lines::
+  deb http://backports.debian.org/debian-backports squeeze-backports main
 
-    Package: *
-    Pin: release a=squeeze-backports
-    Pin-Priority: 999
+Create a **/etc/apt/preferences** file with these three lines:
 
+.. code-block:: bash
 
-* Run apt-get update
+  Package: *
+  Pin: release a=squeeze-backports
+  Pin-Priority: 999
 
-* Run apt-get upgrade
+Then:
+
+.. highlight:: bash
+     
+.. code-block:: bash
+
+  apt-get update
+  apt-get dselect-upgrade
 
 This last command should propose you to update PostgreSQL that is the targeted
 goal.
@@ -85,77 +92,46 @@ Architecture requirement
 We will have to build zc.buildout and Python. With python we have three modules
 needed everywhere: python-imaging, python-ldap and python libxml2 binding.
 
-* build-essential
+.. code-block:: bash
 
-* libsqlite3-dev
-
-* python-dev
-
-* python-setuptools
-
-* python-imaging
-
-* python-lxml
-
-* python-ldap
-
-* python-celementree
-
-* python-cjson
-
-* libssl-dev
-
-* libsasl2-dev
-
-* libldap2-dev
-
-* libgif-dev
-
-* libjpeg62-dev
-
-* libpng12-dev
-
-* libfreetype6-dev
-
-* libxml2-dev
-
-* libxslt1-dev
+  sudo apt-get build-deps python
+  sudo apt-get install build-essential libsqlite3-dev \
+                       python-dev python-setuptools \
+                       python-imaging python-lxml python-ldap \
+                       python-celementree python-cjson \
+                       libssl-dev libsasl2-dev libldap2-dev \
+                       libgif-dev libjpeg62-dev libpng12-dev libfreetype6-dev \
+                       libxml2-dev libxslt1-dev
 
 
 *Memcached* is a ramcache helper for distributed application. We use it between
 zope instances to reduce session overheads.
 
-* memcached
+.. code-block:: bash
 
-* libmemcache-dev
+  sudo apt-get install memcached libmemcache-dev
 
 
 We choose *PostgreSQL 8.4* to simplify the migration on Debian Sqeeze.
 
-* python-psycopg2
+.. code-block:: bash
 
-* postgresql-8.4
-
-* postgresql-contrib-8.4
-
-* postgresql-8.4-slony1
-
-* postgresql-server-dev-8.4
-
-* pidentd
+  sudo apt-get install python-psycopg2 postgresql-8.4 \
+                       postgresql-contrib-8.4 postgresql-8.4-slony1 \
+                       postgresql-server-dev-8.4 pidentd
 
 Munin is installed by default on eash node
 
-* munin
+.. code-block:: bash
 
-* munin-node
+  sudo apt-get install munin munin-node
 
 
 For Varnish cache server
 
-* pkg-config
+.. code-block:: bash
 
-* libpcre3-dev
+  sudo apt-get install pkg-config libpcre3-dev
 
 
 Plone requirements
@@ -164,28 +140,16 @@ Plone requirements
 Unless python modules these requirements are there for specific needs: document
 conversion to html (preview) and to text (indexing).
 
-* lynx
+.. code-block:: bash
 
-* tidy
-
-* xsltproc
-
-* xpdf
-
-* wv
+  sudo apt-get install lynx tidy xsltproc xpdf wv
 
 Developper tools
 ~~~~~~~~~~~~~~~~
 
-* vim-python
+.. code-block:: bash
 
-* git
-
-* mercurial
-
-* subversion
-
-* graphviz
+  sudo apt-get install vim-python git mercurial subversion graphviz
 
 
 Python Sandbox Installation
@@ -211,7 +175,7 @@ At this step you can choose to compile python in user space or in superuser
 space.
 This buildout expect setuptools is installed at least at 0.6.11 version.
 
-::
+.. code-block:: bash
 
   sudo adduser --home /opt/python-envs --disabled-password plone
   sudo easy_install -U setuptools
@@ -228,7 +192,7 @@ This buildout expect setuptools is installed at least at 0.6.11 version.
 We will need to have a virtualenv installed in there to be able to duplicate
 Python2.6 installation quickly.
 
-::
+.. code-block:: bash
 
   cd /opt/python/python-2.6
   source bin/activate
@@ -247,6 +211,6 @@ The next step is to install zopeskel.unis to deploy your project.
 If you want to be able to store ZODB in a PostgreSQL database you should  create
 an user in your postgres database
 
-::
+.. code-block:: bash
 
   sudo -u postgres createuser -e -d -i -l -P -R -S  plone
