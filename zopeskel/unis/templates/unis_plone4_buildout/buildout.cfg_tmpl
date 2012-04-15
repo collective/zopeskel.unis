@@ -1,4 +1,3 @@
-# Buildout base for ${project}
+# Buildout base for ${customer}.${project}
 [buildout]
-extends = profiles/development.cfg
-
+extends = profiles/${buildout_profile}.cfg

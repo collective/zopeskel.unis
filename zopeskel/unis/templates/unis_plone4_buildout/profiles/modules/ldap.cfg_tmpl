@@ -2,11 +2,13 @@
 eggs +=
     python-ldap
     Products.PloneLDAP
+    plone.app.ldap
 
-#zcml +=
+zcml += plone.app.ldap
 
 [versions]
-python-ldap = 2.3.12
-Products.LDAPMultiPlugins = 1.13
-Products.LDAPUserFolder = 2.19
+python-ldap = 2.4.9
+Products.LDAPMultiPlugins = 1.14
+Products.LDAPUserFolder = 2.20
 Products.PloneLDAP = 1.1
+plone.app.ldap = 1.2.8

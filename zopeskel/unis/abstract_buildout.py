@@ -59,3 +59,4 @@ class AbstractBuildout(BaseTemplate):
     category = "Buildout"
 
     vars = copy.deepcopy(BaseTemplate.vars)
+

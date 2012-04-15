@@ -16,7 +16,7 @@
 # client (80) => appache => zope server (${dev_instance})
 
 [buildout]
-extends = standalone.cfg etc/http.cfg
+extends = standalone.cfg etc/http.cfg modules/plonide.cfg
 newest = false
 develop = \${project-settings:develop}
 parts +=
@@ -41,29 +41,30 @@ eggs += plone.reload
         ipdb
         iw.debug
         Products.PDBDebugMode
-        Products.Gloworm
         Products.DocFinderTab
         Products.PrintingMailHost
         Products.DCWorkflowGraph
         collective.workflowed
         collective.portlet.debuginfo
-        collective.profiler
+#        collective.profiler
         plone.app.testing
 
 zcml += plone.reload
         iw.debug
-        Products.Gloworm
         collective.portlet.debuginfo
 
 auto-checkout += collective.portlet.debuginfo
 
 [sources]
-collective.portlet.debuginfo = svn http://svn.plone.org/svn/collective/collective.portlet.debuginfo/trunk/
+#collective.portlet.debuginfo = svn http://svn.plone.org/svn/collective/collective.portlet.debuginfo/trunk/
 
 [versions]
 iw.debug = 0.3
 ipdb = 0.4
 ipython = 0.10.1
+collective.portlet.debuginfo = 1.1
+# No version for developped packages
+#collective.portlet.debuginfo = 
 
 
 #==============================================================================
@@ -75,16 +76,16 @@ instance = ${dev_instance}
 cache = 80
 
 [hosts]
-main = ${project}-dev.${domain_name}
+main = ${customer}-${project}-user.dev.${domain_name}
 
-
+#if $http_utility == 'apache'
 #==============================================================================
 # Apache - virtualhost configuration
 #==============================================================================
 
 [apache]
 backends = \${hosts:main}:\${hosts:instance}:\${ports:instance}
-
+#end if
 
 #==============================================================================
 # Zope - instance configuration

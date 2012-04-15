@@ -8,6 +8,22 @@ from zopeskel.base import var, EASY, EXPERT
 from zopeskel.vars import StringVar, BooleanVar, IntVar, OnOffVar, BoundedIntVar, StringChoiceVar
 
 #--------------------------------------
+#   Allows to choose the customer name
+#--------------------------------------
+
+VAR_CUSTOMER = StringVar(
+    'customer',
+    title='Customer name',
+    description='',
+    default='',
+    modes=(EASY,EXPERT),
+    page='Main',
+    help="""
+This is the customer name.
+"""
+    )
+
+#--------------------------------------
 #   Allows to choose the Domain name
 #--------------------------------------
 
@@ -48,12 +64,35 @@ VAR_PLONEVER = StringVar(
     'plone_version',
     title='Plone Version',
     description='Plone version # to install',
-    default='4.0-latest',
+    default='4-latest',
     modes=(EASY, EXPERT),
     page='Main',
     help="""
 This is the version of Plone that will be used for this buildout.
 You should enter the version number you wish to use.
+"""
+    )
+
+#------------------------------------------
+#   Allows to choose the deployment profile
+#------------------------------------------
+
+VAR_BUILDOUT_PROFILE = StringChoiceVar(
+    'buildout_profile',
+    title='Buildout Default Profile',
+    description='The profile use by default when you will run buildout for the first time',
+    default='development',
+    choices=('development', 'standalone', 'production', 'preproduction', 'local_preproduction'),
+    modes=(EASY, EXPERT),
+    page='Main',
+    help="""
+You can choose the profile that is use when you will run buildout.
+Option are:
+- development (default)
+- standalone (No ZEO)
+- production (ZEO with 2 instances)
+- preproduction (ZEO with 1 instance)
+- local_preproduction (ZEO with 1 instance for local servers)
 """
     )
 
@@ -165,23 +204,23 @@ It will also generate a default configuration for the utility.
 """)
 
 #--------------------------------------
-#   Allows to choose a proxy utility
+#   Allows to choose a http utility
 #--------------------------------------
 
-VAR_PROXY_UTILITY = StringChoiceVar( #XXX
-    'proxy_utility',
-    title='Proxy Utility',
-    description='Which proxy utility would you like? (Apache/NGinx)?',
+VAR_HTTP_UTILITY = StringChoiceVar(
+    'http_utility',
+    title='Front http utility',
+    description='Which front http utility would you like? (Apache/NGinx)?',
     page='Main',
     modes=(EXPERT,),
     default='apache',
     choices=('apache','nginx'),
     help="""
-This option lets you select your proxy utility.
+This option lets you select your front http utility.
 It will also generate a default configuration for the utility.
 """)
 
-VAR_MUNIN = BooleanVar( #XXX
+VAR_MUNIN = BooleanVar(
     'munin',
     title='Munin activation',
     description='Do you want munin stats for you instance',
@@ -257,7 +296,7 @@ VAR_APP_LDAP = BooleanVar(
     title='Install LDAP features',
     description='Do you want to connect a LDAP annuary?',
     default='false',
-    modes=(EASY, EXPERT),
+    modes=(EXPERT),
     help="""
 This option install all needed LDAP products for Plone.
 It supposes that the current server has a python-ldap installed.
@@ -269,7 +308,7 @@ VAR_APP_CAS = BooleanVar(
     title='Install CAS features',
     description='Do you want to connect a CAS SSO?',
     default='false',
-    modes=(EASY, EXPERT),
+    modes=(EXPERT),
     help="""
 This option install all needed CAS products for Plone.
 """
@@ -280,7 +319,7 @@ VAR_APP_METNAV = BooleanVar(
     title='Install Metnav products',
     description='Do you want to use Metnav features?',
     default='false',
-    modes=(EASY, EXPERT),
+    modes=(EXPERT),
     help="""
 This option install all needed metnav products for Plone.
 """
@@ -291,7 +330,7 @@ VAR_APP_GETPAID = BooleanVar(
     title='Install GetPaid products',
     description='Do you want to use GetPaid features?',
     default='false',
-    modes=(EASY, EXPERT),
+    modes=(EXPERT),
     help="""
 This option install all needed to transform your Plone site in an e-commerce things.
 """
@@ -302,7 +341,7 @@ VAR_APP_THEMING = BooleanVar(
     title='Install plone.app.theming products with Diazo',
     description='Do you want to use Diazo features?',
     default='true',
-    modes=(EASY, EXPERT),
+    modes=(EXPERT),
     help="""
 This option install all needed have Diazo theming in your plone site.
 """
@@ -355,9 +394,11 @@ See README.txt for details.
 
     vars = copy.deepcopy(AbstractBuildout.vars)
     vars.extend( [
+        VAR_CUSTOMER,
         VAR_DOMAIN,
         VAR_PLONESITE_PATH,
         VAR_PLONEVER,
+        VAR_BUILDOUT_PROFILE,
         VAR_INSTANCE_TYPE,
         VAR_DB_TYPE,
         VAR_DB_HOST,
@@ -370,7 +411,7 @@ See README.txt for details.
         VAR_PORTS_STARTING_VALUE,
         VAR_BALANCER_UTILITY,
         VAR_CACHE_UTILITY,
-        VAR_PROXY_UTILITY,
+        VAR_HTTP_UTILITY,
         VAR_MUNIN,
         VAR_APP_LDAP,
         VAR_APP_CAS,
@@ -380,6 +421,7 @@ See README.txt for details.
     ])
 
     def run(self, command, output_dir, vars):
+        output_dir = vars["customer"] and "%s.%s"%(str(vars["customer"]).lower(), str(vars["project"]).lower()) or  str(vars["project"]).lower()
 
         self.pre(command, output_dir, vars)
 
@@ -394,7 +436,7 @@ See README.txt for details.
         self.post(command, output_dir, vars)
 
     def post(self, command, output_dir, vars):
-        project_folder = str(vars["project"]).lower() + '_deployement'
+        ## XXX We should cleanup unused modules
 
         super(UnisPlone4Buildout, self).post(command, project_folder, vars)
 

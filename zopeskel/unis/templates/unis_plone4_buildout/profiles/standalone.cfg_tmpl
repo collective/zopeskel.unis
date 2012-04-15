@@ -1,5 +1,5 @@
 #==============================================================================
-# Standalone configuration file for ${project} portal
+# Standalone configuration file for ${customer}:${project} portal
 #==============================================================================
 # => may be useful to set up a small demo site
 
@@ -13,7 +13,7 @@
 # zope server (${dev_instance})
 
 [buildout]
-extends = etc/base.cfg etc/http.cfg
+extends = ./etc/base.cfg ./etc/instance-settings.cfg ./etc/supervisor.cfg ./etc/http.cfg
 newest = false
 develop = \${project-settings:develop}
 parts += instance
@@ -31,15 +31,35 @@ instance = ${dev_instance}
 # Zope - instance configuration
 #==============================================================================
 
-[instance]
-# For more information on this step and configuration options see:
-# http://pypi.python.org/pypi/plone.recipe.zope2instance
-<=instance-settings
-recipe = plone.recipe.zope2instance
+[instance-settings]
+zserver-threads = 5
 zodb-cache-size = 2500
-http-address = \${hosts:instance}:\${ports:instance}
 debug-mode = off
 verbose-security = off
+#if $instance_type == 'filestorage'
+zeo-client = off
+zeo-address = 0
+zeo-client-cache-size = 0MB
+#end if
 #if $instance_type == 'relstorage'
 db-base = \${project}-standalone
 #end if
+
+[instance]
+# For more information on this step and configuration options see:
+# http://pypi.python.org/pypi/plone.recipe.zope2instance
+recipe = plone.recipe.zope2instance
+<=instance-settings
+http-address = \${hosts:instance}:\${ports:instance}
+
+[plonesite]
+instance = instance
+
+#==============================================================================
+# One supervisor to rulez them all
+#==============================================================================
+
+[supervisor]
+programs =
+    20 instance  (autostart=true startsecs=10) \${buildout:bin-directory}/instance  [console]             true \${users:zope}
+
