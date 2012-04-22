@@ -1,6 +1,6 @@
-========================================================
-Installation of a Plone 4 architecture on Debian Squeeze
-========================================================
+======================================================
+Installation of a Plone 4 architecture on Ubuntu 10.04
+======================================================
 
 :Info: See <https://github.com/collective/zopeskel.unis> for more informations
 :Author: Encolpe DEGOUTE <encolpe.degoute@quadra-informatique.fr>

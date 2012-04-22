@@ -21,7 +21,7 @@ Project preparation
 
 At this step verify that your Python interpreter is a python 2.6
 
-::
+.. code-block:: bash
 
   $ python
   Python 2.6.6 (r266:84292, Nov  9 2010, 04:51:52)
@@ -29,7 +29,7 @@ At this step verify that your Python interpreter is a python 2.6
 
 Now you can install our architecture dependencies for Plone 4
 
-::
+.. code-block:: bash
 
   easy_install python-ldap
   easy_install psycopg2
@@ -41,7 +41,7 @@ Now you can install our architecture dependencies for Plone 4
 You can check if the new buildout template is well installed by typing the
 following command:
 
-::
+.. code-block:: bash
 
   paster create --list-templates
 
@@ -52,7 +52,7 @@ following command:
 
 Your new Plone easy installer is ready. You can create a new Plone 4 project.
 
-::
+.. code-block:: bash
 
   paster create -t unis_plone4_buildout
 

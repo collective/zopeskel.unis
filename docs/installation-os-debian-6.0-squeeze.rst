@@ -53,9 +53,7 @@ All the following commands need to be logged as root or with sudo.
 Debian Backports
 ~~~~~~~~~~~~~~~~
 
-Add backports to your sources.list
-
-Add a file called **/etc/apt/sources.list.d/squeeze-backports.list** (or add a new file to ):
+Add a file called **/etc/apt/sources.list.d/squeeze-backports.list** with the following line:
 
 .. code-block:: bash
 
@@ -70,8 +68,6 @@ Create a **/etc/apt/preferences** file with these three lines:
   Pin-Priority: 999
 
 Then:
-
-.. highlight:: bash
      
 .. code-block:: bash
 
