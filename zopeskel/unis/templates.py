@@ -438,5 +438,5 @@ See README.txt for details.
     def post(self, command, output_dir, vars):
         ## XXX We should cleanup unused modules
 
-        super(UnisPlone4Buildout, self).post(command, project_folder, vars)
+        super(UnisPlone4Buildout, self).post(command, output_dir, vars)
 
