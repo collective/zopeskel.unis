@@ -64,7 +64,7 @@ setup(name='zopeskel.unis',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'distribute',
+          'setuptools',
           # -*- Extra requirements: -*-
           'PasteScript',
           'Cheetah>1.0,<=2.2.1',
