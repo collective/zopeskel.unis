@@ -29,7 +29,7 @@ parts +=
 
 # Downloads storage folder
 download-cache = downloads
-ext-cache = ext-cache
+extends-cache = extends
 
 
 #==============================================================================
@@ -45,15 +45,15 @@ eggs += plone.reload
         Products.PrintingMailHost
         Products.DCWorkflowGraph
         collective.workflowed
-        collective.portlet.debuginfo
+#        collective.portlet.debuginfo
 #        collective.profiler
         plone.app.testing
 
 zcml += plone.reload
         iw.debug
-        collective.portlet.debuginfo
+#        collective.portlet.debuginfo
 
-auto-checkout += collective.portlet.debuginfo
+#auto-checkout += collective.portlet.debuginfo
 
 [sources]
 #collective.portlet.debuginfo = svn http://svn.plone.org/svn/collective/collective.portlet.debuginfo/trunk/
@@ -64,7 +64,7 @@ ipdb = 0.4
 ipython = 0.10.1
 collective.portlet.debuginfo = 1.1
 # No version for developped packages
-#collective.portlet.debuginfo = 
+#collective.portlet.debuginfo =
 
 
 #==============================================================================
