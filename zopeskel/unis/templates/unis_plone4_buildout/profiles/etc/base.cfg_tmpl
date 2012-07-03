@@ -22,7 +22,7 @@ extends =
 #if $app_cas == 'true'
     ../modules/cas.cfg
 #end if
-#if $app_metnav
+#if $app_metnav == 'true'
     ../modules/metnav.cfg
 #end if
 #if $app_getpaid == 'true'
