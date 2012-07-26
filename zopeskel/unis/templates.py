@@ -347,6 +347,17 @@ This option install all needed have Diazo theming in your plone site.
 """
 )
 
+VAR_APP_DECO = BooleanVar(
+    'app_deco',
+    title='Install plone.app.deco products',
+    description='Do you want to use Deco features?',
+    default='true',
+    modes=(EXPERT),
+    help="""
+This option install all needed have Deco in your plone site.
+"""
+)
+
 class UnisPlone4Buildout(AbstractBuildout):
     _template_dir = 'templates/unis_plone4_buildout'
     summary = "A buildout for Plone 4.x"
