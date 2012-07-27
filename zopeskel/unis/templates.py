@@ -429,6 +429,7 @@ See README.txt for details.
         VAR_APP_METNAV,
         VAR_APP_GETPAID,
         VAR_APP_THEMING,
+        VAR_APP_DECO,
     ])
 
     def run(self, command, output_dir, vars):
