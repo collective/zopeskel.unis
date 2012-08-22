@@ -1,0 +1,33 @@
+
+[project-settings]
+eggs +=
+    Pillow
+    plone.app.toolbar
+    plone.app.deco
+
+[test]
+eggs +=
+    plone.tiles [test]
+    plone.app.toolbar [test]
+    plone.app.blocks [test]
+    plone.app.layoutpage [test]
+    plone.app.tiles [test]
+    plone.app.texttile [test]
+    plone.app.imagetile [test]
+    plone.app.deco [test]
+#    plone.app.contentlistingtile [test]
+#    plone.app.mediarepository [test]
+
+[versions]
+plone.app.drafts = 1.0a2
+plone.app.blocks = 1.0
+plone.app.layoutpage = 1.0
+plone.app.tiles = 1.0.1
+plone.app.texttile = 1.0
+plone.app.imagetile = 1.0
+plone.app.deco = 1.0
+unittest-jshint = 1.0
+plone.tiles = 1.1
+plone.app.jquery = 1.7.2
+plone.app.jquerytools = 1.4
+plone.app.toolbar = 2.0

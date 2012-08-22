@@ -31,6 +31,9 @@ extends =
 #if $app_theming == 'true'
     ../modules/theming.cfg
 #end if
+#if $app_deco == 'true'
+    ../modules/deco.cfg
+#end if
 
 parts =
     PIL
