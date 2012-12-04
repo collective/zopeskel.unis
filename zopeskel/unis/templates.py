@@ -429,10 +429,13 @@ See README.txt for details.
         VAR_APP_METNAV,
         VAR_APP_GETPAID,
         VAR_APP_THEMING,
+        VAR_APP_DECO,
     ])
 
     def run(self, command, output_dir, vars):
-        output_dir = vars["customer"] and "%s.%s"%(str(vars["customer"]).lower(), str(vars["project"]).lower()) or  str(vars["project"]).lower()
+        output_dir = str(vars["project"]).lower()
+        if vars["customer"]:
+            output_dir =  "%s.%s"%(str(vars["customer"]).lower(), str(vars["project"]).lower())
 
         self.pre(command, output_dir, vars)
 
