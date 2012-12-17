@@ -21,7 +21,7 @@ This module contains the tool of zopeskel.unis
 import os
 from setuptools import setup, find_packages
 
-version = '1.12'
+version = '1.13'
 
 documentation = ''
 if os.path.exists(os.path.join("docs", "unis-zopeskel-usage.txt")):
