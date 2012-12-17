@@ -1,6 +1,15 @@
 Changelog
 =========
 
+1.14  2012-12-17
+----------------
+
+- Unpin old versions
+  [encolpe]
+
+- Add a switch for plone IDE
+  [encolpe]
+
 1.13  2012-12-17
 ----------------
 
