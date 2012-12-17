@@ -8,24 +8,11 @@ pil = http://dist.plone.org/thirdparty/PIL-1.1.7.tar.gz
 pound = http://www.apsis.ch/pound/Pound-2.5.tgz
 varnish = http://repo.varnish-cache.org/source/varnish-2.1.5.tar.gz
 squid = http://www.squid-cache.org/Versions/v3/3.1/squid-3.1.12.tar.gz
+## HAProxy official release is here: http://haproxy.1wt.eu/download/1.4/src/haproxy-1.4.22.tar.gz
 haproxy = http://dist.plone.org/thirdparty/haproxy-1.4.8.zip
 
 # Versions - Define eggs version
 [versions]
-zc.buildout = 1.5.2
-distribute = 0.6.16
-docutils = 0.7
-zc.recipe.cmmi = 1.3.2
-
-plone.recipe.varnish = 1.1
-plone.recipe.apache = 0.3.2
-supervisor = 3.0a10
-
-zope.interface = 3.6.4
-zope.schema = 3.6.0
-zope.exceptions = 3.6.1
-zope.testing = 3.10.2
-
-# Development
-zc.recipe.testrunner = 1.4.0
-zc.recipe.egg = 1.3.2
+#plone.recipe.varnish = 1.2.2
+#plone.recipe.apache = 0.3.2
+#supervisor = 3.0a10
