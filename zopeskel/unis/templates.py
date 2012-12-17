@@ -351,10 +351,21 @@ VAR_APP_DECO = BooleanVar(
     'app_deco',
     title='Install plone.app.deco products',
     description='Do you want to use Deco features?',
-    default='true',
+    default='false',
     modes=(EXPERT),
     help="""
 This option install all needed have Deco in your plone site.
+"""
+)
+
+VAR_APP_IDE = BooleanVar(
+    'app_ide',
+    title='Install plone IDE environmant',
+    description='Do you want to use Plone IDE features?',
+    default='false',
+    modes=(EXPERT),
+    help="""
+This option install all needed to have plone IDE in the development mode.
 """
 )
 
@@ -430,11 +441,12 @@ See README.txt for details.
         VAR_APP_GETPAID,
         VAR_APP_THEMING,
         VAR_APP_DECO,
+        VAR_APP_IDE,
     ])
 
     def run(self, command, output_dir, vars):
         ## /!\ output_dir = './'+vars['project']
-        ##     vars['project'] can be a path        
+        ##     vars['project'] can be a path
 
         if vars["customer"]:
             project_path = str(vars["project"]).lower().split(os.path.sep)
