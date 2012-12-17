@@ -16,7 +16,7 @@
 # client (80) => appache => zope server (${dev_instance})
 
 [buildout]
-extends = standalone.cfg etc/http.cfg modules/plonide.cfg
+extends = standalone.cfg etc/http.cfg
 newest = false
 develop = \${project-settings:develop}
 parts +=
