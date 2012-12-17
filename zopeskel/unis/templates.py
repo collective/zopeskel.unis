@@ -433,9 +433,14 @@ See README.txt for details.
     ])
 
     def run(self, command, output_dir, vars):
-        output_dir = str(vars["project"]).lower()
+        ## /!\ output_dir = './'+vars['project']
+        ##     vars['project'] can be a path        
+
         if vars["customer"]:
-            output_dir =  "%s.%s"%(str(vars["customer"]).lower(), str(vars["project"]).lower())
+            project_path = str(vars["project"]).lower().split(os.path.sep)
+            project_path[-1] = '.'.join([str(vars["customer"]).lower(),
+                                         project_path[-1]])
+            output_dir  = (os.path.sep).join(project_path)
 
         self.pre(command, output_dir, vars)
 
