@@ -1,6 +1,24 @@
 Changelog
 =========
 
+1.14  2012-12-17
+----------------
+
+- Unpin old versions
+  [encolpe]
+
+- Add a switch for plone IDE
+  [encolpe]
+
+1.13  2012-12-17
+----------------
+
+- Fix how customer name is added in the project path
+  [encolpe]
+
+- Remove ploneIDE automatic installation
+  [encolpe]
+
 1.12  2012-05-04
 ----------------
 
