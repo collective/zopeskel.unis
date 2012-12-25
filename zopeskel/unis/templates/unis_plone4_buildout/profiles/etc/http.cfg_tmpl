@@ -20,9 +20,9 @@ bind = \${ports:main}
 backends = \${hosts:main}:\${hosts:cache}:\${ports:cache}
 zope2_vhm_map = \${hosts:main}:/\${plone-sites:main}
 resource-expires =
-      \.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$:"access plus 2 days"
+      \.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|mov|mp4|avi|mkv|ogg|ogv|mp3|webm)$:"access plus 2 days"
 resource-headers =
-      \.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$:Cache-Control:"max-age=172800, public, must-revalidate"
+      \.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|mov|mp4|avi|mkv|ogg|ogv|mp3|webm)$:Cache-Control:"max-age=172800, public, must-revalidate"
 extras =
     SetOutputFilter DEFLATE
 
@@ -31,7 +31,7 @@ extras =
     BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
 
     SetEnvIfNoCase Request_URI \
-      \.(?:gif|jpe?g|png|zip|tgz|gz|rar|ace)$ no-gzip dont-vary
+      \.(?:gif|jpe?g|png|zip|tgz|gz|rar|ace|swf|flv|mov|mp4|avi|mkv|ogg|ogv|mp3|webm|pdf)$ no-gzip dont-vary
     SetEnvIfNoCase Request_URI \
       \/(?:image)$ no-gzip dont-vary
 
