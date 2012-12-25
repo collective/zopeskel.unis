@@ -24,8 +24,20 @@ parts += instance
 #==============================================================================
 
 [ports]
-instance = ${dev_instance}
+instance = \${dev_instance}
 
+
+[hosts]
+main = \${project}-standalone.\${domain_name}
+
+#if $http_utility == 'apache'
+#==============================================================================
+# Apache - virtualhost configuration
+#==============================================================================
+
+[apache]
+backends = \${hosts:main}:\${hosts:instance}:\${ports:instance}
+#end if
 
 #==============================================================================
 # Zope - instance configuration
