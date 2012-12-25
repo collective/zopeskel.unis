@@ -42,6 +42,8 @@ rel-storage =
     blob-dir \${buildout:directory}/var/blobstorage
 #end if
 
+##${:_buildout_section_name_}
+
 environment-vars =
     PTS_LANGUAGES en fr
     zope_i18n_allowed_languages en fr
